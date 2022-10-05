@@ -5,20 +5,16 @@
 
 <head>
     {% include 'head.html' %}
-    <link rel="stylesheet" href="{% static './static/css/app.css' %}">
+    <link rel="stylesheet" href="{% static '/css/app.css' %}">
     <title>Películas</title>
 
 </head>
 
-<body action="/signup/" method="POST">
+<body>
 
     {% include '_navbar.html' %}
     
     
-
-
-    {{error}}
-    {% csrf_token %}
     <section class="vh-100 bg-image">
         <div class="mask d-flex align-items-center h-100 gradient-custom-3">
             <div class="container h-100">
@@ -28,36 +24,41 @@
                             <div class="card-body p-5">
                                 <h2 class="text-uppercase text-center mb-5">Registrar una cuenta</h2>
 
-                                <form>
-
+                                <form  method="POST">
+                                    {% csrf_token %}
                                     <div class="form-outline mb-4">
-                                        <input type="text" id="inputName" class="form-control form-control-lg" />
+                                        <input name="name" type="text" id="inputName" class="form-control form-control-lg" />
                                         <label class="form-label" for="inputName" name="username">Tu nombre</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input type="email" id="inputEmail" class="form-control form-control-lg" />
+                                        <input name="email" type="email" id="inputEmail" class="form-control form-control-lg" />
                                         <label class="form-label" for="inputEmail">Tu email</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <input type="password" id="inputPw"
-                                            class="form-control form-control-lg" />
-                                        <label class="form-label" for="inputPw" name="password1">Contraseña</label>
+                                            class="form-control form-control-lg" name="password1" />
+                                        <label class="form-label" for="inputPw">Contraseña</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <input type="password" id="repeatPw"
-                                            class="form-control form-control-lg" />
-                                        <label class="form-label" for="repeatPw" name="password2">Repite tu contraseña</label>
+                                            class="form-control form-control-lg" name="password2" />
+                                        <label class="form-label" for="repeatPw" >Repite tu contraseña</label>
                                     </div>
 
                                     <div class="d-flex justify-content-center">
-                                        <button type="button"
+                                        <button type="submit"
                                             class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href="/">Register</button>
                                     </div>
 
-                                    <p class="text-center text-muted mt-5 mb-0">Ya tienes una cuenta? <a href="/signin"
+                                    <div style="color: red;">
+                                        {{error}}
+                                    </div>
+                                 
+
+                                    <p class="text-center text-muted mt-5 mb-0">Ya tienes una cuenta? <a href="/signin/"
                                             class="fw-bold text-body"><u>Inicia sesión aquí</u></a></p>
 
                                 </form>

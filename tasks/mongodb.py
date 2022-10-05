@@ -7,7 +7,7 @@ def conexion():
     return cliente
 
 def verficiar_user_repetido(email):
-    usuario = buscar_usuario()
+    usuario = buscar_usuario(email)
     if(str(type(usuario)) == "<class 'NoneType'>"):
         return True
     else:
@@ -47,6 +47,5 @@ def login(email,passwd):
     
 
 
-login("omarnova@gmail.com","passwd")
     
 
