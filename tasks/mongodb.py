@@ -38,9 +38,9 @@ def login(email,passwd):
         token = usuario['passwd']
         pwd = f.decrypt(token)
         if(pwd.decode() == passwd):
-            print(type(usuario))
+            return True
         else:
-            print('contra wrong')
+            return False
     else:
         print("usuario no registrado")
     
