@@ -6,8 +6,10 @@ from django.db import IntegrityError
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .models import Task
-
+from .mongodb import insert_user, verficiar_user_repetido
 from .forms import TaskForm
+
+
 
 # Create your views here.
 
@@ -16,18 +18,15 @@ def signup(request):
     if request.method == 'GET':
         return render(request, 'signup.html')
     else:
-
+        
         if request.POST["password1"] == request.POST["password2"]:
-            try:
-                user = User.objects.create_user(
-                    request.POST["username"], password=request.POST["password1"])
-                user.save()
-                login(request, user)
-                return redirect('tasks')
-            except IntegrityError:
-                return render(request, 'signup.html', {"error": "Username already exists."})
-
-        return render(request, 'signup.html', {"error": "Passwords did not match."})
+                if(verficiar_user_repetido(request.POST['email'])):
+                    insert_user(request.POST['name'],request.POST['email'],request.POST['password1'])
+                    return redirect('home')
+                else:
+                    return render(request, 'signup.html', {"error": "Username already exists."})
+        else:
+            return render(request, 'signup.html', {"error": "Passwords did not match."})
 
 
 @login_required
