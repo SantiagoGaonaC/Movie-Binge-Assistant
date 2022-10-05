@@ -14,7 +14,7 @@ def verficiar_user_repetido(email):
         return False
 
 
-def insert_user(nombre, passwd, email ):
+def insert_user(nombre, email, passwd ):
     if(verficiar_user_repetido(email)):
         cliente = conexion()
         users_col = cliente["moviesimdb"]["users"]
