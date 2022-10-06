@@ -44,7 +44,6 @@ def login(email,passwd):
     else:
         print("usuario no registrado")
     
-    
 
 
     

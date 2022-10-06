@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Task
 from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login
 from .forms import TaskForm
-
+from .session import createSession, getSession
 
 
 # Create your views here.
@@ -56,6 +56,12 @@ def create_task(request):
 
 
 def home(request):
+    sesion = getSession(request)
+    if sesion == "no":
+        return render(request, 'home.html',{"sec": "No hay sesion"})
+    else:
+        return render(request, 'home.html',{"sec": sesion})
+
     return render(request, 'home.html')
 
 
@@ -71,6 +77,7 @@ def signin(request):
     else:
         if(str(type(buscar_usuario(request.POST['email']))) == "<class 'dict'>"):
             if(login(request.POST['email'],request.POST['passwd'])):
+                createSession(request,request.POST['email'])
                 return redirect('home')
             else:
                 return render(request, 'signin.html', {"error": "Username or password is incorrect."})
