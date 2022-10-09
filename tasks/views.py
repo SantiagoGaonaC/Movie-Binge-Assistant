@@ -9,10 +9,13 @@ from .models import Task
 from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login
 from .forms import TaskForm
 from .session import createSession, getSession
-
+from django.core.paginator import Paginator
+import json
+from django.http import Http404
 
 # Create your views here.
-
+input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
+pelis = json.load(input_file)
 
 def signup(request):
     if request.method == 'GET':
@@ -69,6 +72,23 @@ def home(request):
 def signout(request):
     logout(request)
     return redirect('home')
+
+
+def lista_peliculas(request):
+    input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
+    pelis = json.load(input_file)
+    page = request.GET.get('page',1)
+
+    try:
+        paginator = Paginator(pelis, 12)
+        pelis = paginator.page(page)
+    except:
+        raise Http404
+
+    
+    
+
+    return render(request, 'pelis.html',  { 'pelis': pelis })
 
 
 def signin(request):
