@@ -1,9 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="container">
-  <h1>Home</h1>
-  <h1>{{sec}}</h1>
 
+  <br>
   <div class="container">
     <div class="Posters" style="display: -ms-flexbox;display: flex;-ms-flex-flow: row wrap;flex-flow: row wrap;margin: 0 -0.5rem;">
       {% for m in pelis %}
@@ -22,6 +21,8 @@
       {% endfor %}
     </div>
   </div>
+
+  <a class="btn btn-primary" href="/pelis">Ir a peliculas</a>
 
 
 </div>
