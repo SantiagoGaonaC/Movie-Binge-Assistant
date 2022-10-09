@@ -26,8 +26,7 @@ from django.utils.http import urlsafe_base64_encode
 from tasks import mongodb
 
 # Create your views here.
-input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
-pelis = json.load(input_file)
+
 
 def signup(request):
     if request.method == 'GET':
