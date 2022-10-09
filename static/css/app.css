@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 body {
   background-color: #084c61;
+  font-family: "Source Sans Pro", Arial, sans-serif;
 }
 
 .gradient-custom-3 {
