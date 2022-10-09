@@ -93,10 +93,12 @@ def lista_peliculas(request):
     except:
         raise Http404
 
-    
-    
-
     return render(request, 'pelis.html',  { 'pelis': pelis })
+
+
+def detalle_peli(request,id):
+    return render(request,'detalle_pelis.html',{'id':id})
+
 
 
 def signin(request):

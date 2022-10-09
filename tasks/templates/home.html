@@ -8,7 +8,7 @@
     <div class="Posters " style="display: -ms-flexbox;display: flex;-ms-flex-flow: row wrap;flex-flow: row wrap;margin: 0 0rem;background-color: #084C61;">
       {% for m in pelis %}
       <div class="">
-        <a href="" class="btn Posters-link shadow p-3 mb-5 rounded" style="margin: 0 10px;display: inline-block;color: white;width: 280px;padding: 0 0.5rem 1rem;font-size: 15px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+        <a href="pelis/{{m.imdb_id}}" class="btn Posters-link shadow p-3 mb-5 rounded" style="margin: 0 10px;display: inline-block;color: white;width: 280px;padding: 0 0.5rem 1rem;font-size: 15px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
           
           <img src="https://imgmovies.blob.core.windows.net/imagenes/{{m.original_title}}.jpg" class="card-img-top btn-img" alt="{{ m.original_title}}"  width="154" height="331">
           <br>
