@@ -97,7 +97,6 @@ def signout(request):
 
 def perfil(request):
     sesion = getSession(request)
-    print(sesion)
     if sesion == "no":
         return redirect('signin')
     else:
