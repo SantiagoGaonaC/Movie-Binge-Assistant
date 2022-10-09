@@ -99,8 +99,7 @@ def perfil(request):
     if sesion == "no":
         return redirect('signin')
     else:
-        len(buscar_usuario(sesion)['pelis'])
-        return render(request, 'login/perfil.html', {'data': buscar_usuario(sesion)} )
+        return render(request, 'login/perfil.html', {'data': buscar_usuario(sesion), 'len':len(buscar_usuario(sesion)['pelis']) } )
 
 def lista_peliculas(request):
     input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
