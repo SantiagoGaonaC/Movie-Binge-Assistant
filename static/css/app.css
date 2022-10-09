@@ -91,3 +91,7 @@ body {
 .footer button {
   background-color: #212529;
 }
+
+.hover-card:hover {
+  transform: scale(1.025);
+}
