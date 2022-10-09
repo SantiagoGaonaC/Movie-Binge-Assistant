@@ -7,8 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-
-    <h1>id: {{id}}</h1>
+  {% if id == 'tt0094675' %}
+        <h1>id: {{id}}</h1>
+    {% else %}
+        <h1>No hay {{h}} </h1>
+    {% endif %}
     
 </body>
 </html>

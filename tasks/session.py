@@ -10,3 +10,6 @@ def getSession(request):
         return request.session['user'] 
     else:
         return "no"
+
+def deleteSession(request):
+    request.session.pop("user", None)

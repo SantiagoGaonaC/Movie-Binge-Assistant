@@ -1,6 +1,5 @@
-from ast import For
-from base64 import urlsafe_b64encode
-from symbol import parameters
+
+import re
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
@@ -11,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Task
 from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login
 from .forms import TaskForm
-from .session import createSession, getSession
+from .session import createSession, getSession, deleteSession
 from django.core.paginator import Paginator
 import json
 from django.http import Http404
@@ -70,9 +69,13 @@ def create_task(request):
         except ValueError:
             return render(request, 'create_task.html', {"form": TaskForm, "error": "Error creating task."})
 
+def logout(request):
+    deleteSession(request)
+    return redirect('home')
+
 
 def home(request):
-    #sesion = getSession(request)
+    sesion = getSession(request)
     input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
     pelis = json.load(input_file)
     datos = []
@@ -80,11 +83,10 @@ def home(request):
         datos.append(pelis[p])
     
 
-    #if sesion == "no":
-    #    return render(request, 'home.html',{"sec": "No hay sesion"})
-    #else:
-     #   return render(request, 'home.html',{"sec": sesion}
-    return render(request, 'home.html',  { 'pelis': datos })
+    if sesion == "no":
+        return render(request, 'home.html',  { 'pelis': datos })
+    else:
+       return render(request, 'login/home_login.html',  { 'pelis': datos })
     
 
 
@@ -93,6 +95,13 @@ def signout(request):
     logout(request)
     return redirect('home')
 
+def perfil(request):
+    sesion = getSession(request)
+    print(sesion)
+    if sesion == "no":
+        return redirect('signin')
+    else:
+       return render(request, 'login/perfil.html', {'data': buscar_usuario(sesion)} )
 
 def lista_peliculas(request):
     input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
