@@ -82,6 +82,11 @@ def signout(request):
     return redirect('home')
 
 
+def pelicula_detalle(request, id):
+
+    return render(request, 'create_task.html', {"form": TaskForm})
+
+
 def lista_peliculas(request):
     input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
     pelis = json.load(input_file)
