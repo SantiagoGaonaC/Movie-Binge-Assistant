@@ -76,6 +76,7 @@ def logout(request):
 
 def home(request):
     sesion = getSession(request)
+    print(sesion)
     input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
     pelis = json.load(input_file)
     datos = []
@@ -97,7 +98,6 @@ def signout(request):
 
 def perfil(request):
     sesion = getSession(request)
-    print(sesion)
     if sesion == "no":
         return redirect('signin')
     else:
