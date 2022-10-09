@@ -7,6 +7,3 @@ sqlparse==0.4.2
 toml==0.10.2
 pymongo==4.2.0
 cryptography==38.0.1
-djongo==1.3.6
-django-crispy-forms==1.14.0
-djmongoauth==2.8.2
