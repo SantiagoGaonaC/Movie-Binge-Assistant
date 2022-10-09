@@ -1,3 +1,4 @@
+from ast import For
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
@@ -6,13 +7,16 @@ from django.db import IntegrityError
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .models import Task
-from .mongodb import insert_user, verficiar_user_repetido
+from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login
 from .forms import TaskForm
-
-
+from .session import createSession, getSession
+from django.core.paginator import Paginator
+import json
+from django.http import Http404
 
 # Create your views here.
-
+input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
+pelis = json.load(input_file)
 
 def signup(request):
     if request.method == 'GET':
@@ -56,7 +60,20 @@ def create_task(request):
 
 
 def home(request):
-    return render(request, 'home.html')
+    #sesion = getSession(request)
+    input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
+    pelis = json.load(input_file)
+    datos = []
+    for p in range(0,12):
+        datos.append(pelis[p])
+    
+
+    #if sesion == "no":
+    #    return render(request, 'home.html',{"sec": "No hay sesion"})
+    #else:
+     #   return render(request, 'home.html',{"sec": sesion}
+    return render(request, 'home.html',  { 'pelis': datos })
+    
 
 
 @login_required
@@ -65,17 +82,36 @@ def signout(request):
     return redirect('home')
 
 
+def lista_peliculas(request):
+    input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
+    pelis = json.load(input_file)
+    page = request.GET.get('page',1)
+
+    try:
+        paginator = Paginator(pelis, 12)
+        pelis = paginator.page(page)
+    except:
+        raise Http404
+
+    
+    
+
+    return render(request, 'pelis.html',  { 'pelis': pelis })
+
+
 def signin(request):
     if request.method == 'GET':
-        return render(request, 'signin.html', {"form": AuthenticationForm})
+        return render(request, 'signin.html')
     else:
-        user = authenticate(
-            request, username=request.POST['username'], password=request.POST['password'])
-        if user is None:
-            return render(request, 'signin.html', {"form": AuthenticationForm, "error": "Username or password is incorrect."})
-
-        login(request, user)
-        return redirect('tasks')
+        if(str(type(buscar_usuario(request.POST['email']))) == "<class 'dict'>"):
+            if(login(request.POST['email'],request.POST['passwd'])):
+                createSession(request,request.POST['email'])
+                return redirect('home')
+            else:
+                return render(request, 'signin.html', {"error": "Username or password is incorrect."})
+        else:
+            return render(request, 'signin.html', {"error": "Username not exists."})
+        
 
 @login_required
 def task_detail(request, task_id):

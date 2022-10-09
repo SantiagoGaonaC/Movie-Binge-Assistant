@@ -1,3 +1,7 @@
+body{
+    background-color: #084C61;
+}
+
 .gradient-custom-3 {
 /* fallback for old browsers */
 background: #84C5FA;
@@ -21,4 +25,45 @@ background: linear-gradient(to right, rgba(132, 197, 250, 0.55), rgba(244, 143, 
 
 .btn-success {
     border-color: #84C5FA;
+}
+
+.Posters {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin: 0 -0.5rem;
+    
+}
+
+.Posters-link {
+    display: inline-block;
+    color: #070707;
+    width: 33.33%;
+    padding: 0 0.5rem 1rem;
+    font-size: 13px;
+}
+
+.listing-content {
+    background: #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+    -webkit-box-shadow: 10px 10px 40px 0 rgb(52 58 64 / 10%);
+    -moz-box-shadow: 10px 10px 40px 0 rgba(52,58,64,.1);
+    box-shadow: 10px 10px 40px 0 rgb(52 58 64 / 10%);
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    padding: 7px;
+}
+
+.listing-content p {
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
