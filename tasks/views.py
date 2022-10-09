@@ -1,3 +1,4 @@
+from ast import For
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
@@ -59,13 +60,20 @@ def create_task(request):
 
 
 def home(request):
-    sesion = getSession(request)
-    if sesion == "no":
-        return render(request, 'home.html',{"sec": "No hay sesion"})
-    else:
-        return render(request, 'home.html',{"sec": sesion})
+    #sesion = getSession(request)
+    input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
+    pelis = json.load(input_file)
+    datos = []
+    for p in range(0,12):
+        datos.append(pelis[p])
+    
 
-    return render(request, 'home.html')
+    #if sesion == "no":
+    #    return render(request, 'home.html',{"sec": "No hay sesion"})
+    #else:
+     #   return render(request, 'home.html',{"sec": sesion}
+    return render(request, 'home.html',  { 'pelis': datos })
+    
 
 
 @login_required
