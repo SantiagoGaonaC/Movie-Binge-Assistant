@@ -59,10 +59,10 @@ body {
   width: 33.33%;
   padding: 0 0.5rem 1rem;
   font-size: 13px;
+  background-color: #4F6D7A;
 }
 
 .listing-content {
-  background: #fff;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
