@@ -99,24 +99,20 @@ def perfil(request):
     if sesion == "no":
         return redirect('signin')
     else:
-        return render(request, 'login/perfil.html', {'data': buscar_usuario(sesion), 'len':len(buscar_usuario(sesion)['pelis']) } )
+       return render(request, 'login/perfil.html', {'data': buscar_usuario(sesion)} )
 
 def lista_peliculas(request):
     input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
     pelis = json.load(input_file)
     page = request.GET.get('page',1)
-    sesion = getSession(request)
+
     try:
         paginator = Paginator(pelis, 12)
         pelis = paginator.page(page)
     except:
         raise Http404
 
-    if sesion == "no":
-        return render(request, 'pelis.html',  { 'pelis': pelis })
-    else:
-       return render(request, 'login/pelis_login.html', { 'pelis': pelis })
-
+    return render(request, 'pelis.html',  { 'pelis': pelis })
 
 
 def detalle_peli(request,id):

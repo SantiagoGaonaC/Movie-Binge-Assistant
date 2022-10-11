@@ -21,7 +21,7 @@ def insert_user(nombre, email, passwd ):
         key = Fernet.generate_key()
         f = Fernet(key)
         token = f.encrypt(str.encode(passwd))
-        users_col.insert_one( { "nombre": nombre, "passwd": token, "key": key, "email": email, "pelis": [] } )
+        users_col.insert_one( { "nombre": nombre, "passwd": token, "key": key, "email": email } )
         cliente.close()
 
 def buscar_usuario(email):

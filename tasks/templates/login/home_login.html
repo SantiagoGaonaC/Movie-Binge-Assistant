@@ -8,11 +8,11 @@
     <div class="Posters " style="display: -ms-flexbox;display: flex;-ms-flex-flow: row wrap;flex-flow: row wrap;margin: 0 0rem;background-color: #084C61;">
       {% for m in pelis %}
       <div class="">
-        <a href="pelicula/{{m.imdb_id}}" class="btn Posters-link shadow p-3 mb-5 rounded" style="background-color: #4F6D7A;margin: 0 10px;display: inline-block;color: white;width: 280px;padding: 0 0.5rem 1rem;font-size: 15px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+        <a href="pelicula/{{m.imdb_id}}" class="btn Posters-link shadow p-3 mb-5 rounded" style="margin: 0 10px;display: inline-block;color: white;width: 280px;padding: 0 0.5rem 1rem;font-size: 15px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
           
-          <img src="https://imgmovies.blob.core.windows.net/movies-img/{{m.imdb_id}}.jpg" class="card-img-top btn-img" alt="{{ m.original_title}}"  width="154" height="331">
+          <img src="https://imgmovies.blob.core.windows.net/imagenes/{{m.original_title}}.jpg" class="card-img-top btn-img" alt="{{ m.original_title}}"  width="154" height="331">
           <br>
-          <div class="listing-content" style="-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 0px;overflow: hidden;-webkit-box-shadow: 10px 10px 40px 0 rgb(52 58 64 / 10%);-moz-box-shadow: 10px 10px 40px 0 rgba(52,58,64,.1);box-shadow: 10px 10px 40px 0 rgb(52 58 64 / 10%);-webkit-transition: all .3s ease;-moz-transition: all .3s ease;-ms-transition: all .3s ease;-o-transition: all .3s ease;transition: all .3s ease;padding: 7px;">
+          <div class="listing-content" style="background-color: #084C61;-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 0px;overflow: hidden;-webkit-box-shadow: 10px 10px 40px 0 rgb(52 58 64 / 10%);-moz-box-shadow: 10px 10px 40px 0 rgba(52,58,64,.1);box-shadow: 10px 10px 40px 0 rgb(52 58 64 / 10%);-webkit-transition: all .3s ease;-moz-transition: all .3s ease;-ms-transition: all .3s ease;-o-transition: all .3s ease;transition: all .3s ease;padding: 7px;">
             <p style=" font-weight: 700;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 20px;">{{m.original_title}}({{m.release_date.6}}{{m.release_date.7}}{{m.release_date.8}}{{m.release_date.9}})</p>
           <p >genders: {{m.genres}}</p>
           <p style="color: #30cf30;"><i class="bi bi-star-fill" style="color: #ffdf00;border-color: black;border: 10px;"></i>{{m.vote_average}}/10</p>
