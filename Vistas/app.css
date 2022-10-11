@@ -22,3 +22,7 @@ background: linear-gradient(to right, rgba(132, 197, 250, 0.55), rgba(244, 143, 
 .btn-success {
     border-color: #84C5FA;
 }
+
+.navbarText {
+    padding-left: 20px;
+}
