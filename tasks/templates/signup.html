@@ -6,7 +6,7 @@
 <head>
     {% include 'head.html' %}
     <link rel="stylesheet" href="{% static '/css/app.css' %}">
-    <title>Películas</title>
+    <title>Movies</title>
 
 </head>
 
@@ -22,30 +22,30 @@
                     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                         <div class="card" style="border-radius: 15px;">
                             <div class="card-body p-5">
-                                <h2 class="text-uppercase text-center mb-5">Registrar una cuenta</h2>
+                                <h2 class="text-uppercase text-center mb-5">Register account</h2>
 
                                 <form  method="POST">
                                     {% csrf_token %}
                                     <div class="form-outline mb-4">
                                         <input name="name" type="text" id="inputName" class="form-control form-control-lg" />
-                                        <label class="form-label" for="inputName" name="username">Tu nombre</label>
+                                        <label class="form-label" for="inputName" name="username">Name</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <input name="email" type="email" id="inputEmail" class="form-control form-control-lg" />
-                                        <label class="form-label" for="inputEmail">Tu email</label>
+                                        <label class="form-label" for="inputEmail">E-mail</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <input type="password" id="inputPw"
                                             class="form-control form-control-lg" name="password1" />
-                                        <label class="form-label" for="inputPw">Contraseña</label>
+                                        <label class="form-label" for="inputPw">password</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <input type="password" id="repeatPw"
                                             class="form-control form-control-lg" name="password2" />
-                                        <label class="form-label" for="repeatPw" >Repite tu contraseña</label>
+                                        <label class="form-label" for="repeatPw" >Repeat your password</label>
                                     </div>
 
                                     <div class="d-flex justify-content-center">
@@ -58,8 +58,8 @@
                                     </div>
                                  
 
-                                    <p class="text-center text-muted mt-5 mb-0">Ya tienes una cuenta? <a href="/signin/"
-                                            class="fw-bold text-body"><u>Inicia sesión aquí</u></a></p>
+                                    <p class="text-center text-muted mt-5 mb-0">Do you already have an account? <a href="/signin/"
+                                            class="fw-bold text-body"><u>Sing In here</u></a></p>
 
                                 </form>
 

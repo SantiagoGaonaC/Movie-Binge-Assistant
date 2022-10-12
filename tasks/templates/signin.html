@@ -7,7 +7,7 @@
 <head>
     {% include 'head.html' %}
     <link rel="stylesheet" href="{% static '/css/app.css' %}">
-    <title>Películas</title>
+    <title>Movies</title>
 
 </head>
 
@@ -23,19 +23,19 @@
                     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                         <div class="card" style="border-radius: 15px;">
                             <div class="card-body p-5">
-                                <h2 class="text-uppercase text-center mb-5">Iniciar sesión</h2>
+                                <h2 class="text-uppercase text-center mb-5">Sing In</h2>
 
                                 <form  method="POST">
                                     {% csrf_token %}
                                     <div class="form-outline mb-4">
                                         <input name="email" type="email" id="inputEmail" class="form-control form-control-lg" />
-                                        <label class="form-label" for="inputEmail">Tu email</label>
+                                        <label class="form-label" for="inputEmail">E-Mail</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <input name="passwd" type="password" id="inputPw"
                                             class="form-control form-control-lg" />
-                                        <label class="form-label" for="inputPw">Contraseña</label>
+                                        <label class="form-label" for="inputPw">Password</label>
                                     </div>
 
                                     <div style="color: red;">
@@ -44,13 +44,13 @@
 
                                     <div class="d-flex justify-content-center">
                                         <button type="submit" 
-                                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href="/" >Ingresar</button>
+                                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href="/" >Join</button>
                                     </div>
                                     <a href="{% url 'password_reset' %}">Forget Password</a>
                                    
 
-                                    <p class="text-center text-muted mt-5 mb-0">No tienes una cuenta? <a href="/signup" 
-                                            class="fw-bold text-body"><u>Registrate aquí</u></a></p>
+                                    <p class="text-center text-muted mt-5 mb-0">You don't have an account yet? <a href="/signup" 
+                                            class="fw-bold text-body"><u>Sing Up here</u></a></p>
                                             
 
                                 </form>
