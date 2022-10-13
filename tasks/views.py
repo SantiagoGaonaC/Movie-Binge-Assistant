@@ -80,12 +80,8 @@ def home(request):
     datos = []
     for p in range(0,12):
         datos.append(pelis[p])
-    
 
-    if sesion == "no":
-        return render(request, 'home.html',  { 'pelis': datos })
-    else:
-       return render(request, 'login/home_login.html',  { 'pelis': datos })
+    return render(request, 'home.html',  { 'pelis': datos, 'se': sesion }) 
     
 
 
@@ -112,15 +108,9 @@ def lista_peliculas(request):
     except:
         raise Http404
 
-    if sesion == "no":
-        return render(request, 'pelis.html',  { 'pelis': pelis })
-    else:
-       return render(request, 'login/pelis_login.html', { 'pelis': pelis })
+    return render(request, 'pelis.html', { 'pelis': pelis, 'se': sesion })
 
 
-
-def detalle_peli(request,id):
-    return render(request,'detalle_pelis.html',{'id':id})
 
 
 

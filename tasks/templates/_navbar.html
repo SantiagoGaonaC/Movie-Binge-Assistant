@@ -15,15 +15,29 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a href="/" class="nav-link">Home</a>
+          <a href="/" class="nav-link text-white">Home</a>
         </li>
+
+        {% if se == "no" %}
        
         <li class="nav-item">
-          <a href="/signin" class="nav-link">Login</a>
+          <a href="/signin" class="nav-link text-white">Login</a>
         </li>
         <li class="nav-item">
-          <a href="/signup" class="nav-link">Register</a>
+          <a href="/signup" class="nav-link text-white">Register</a>
         </li>
+        {% else %}
+
+        <li class="nav-item">
+          <a href="/perfil" class="nav-link text-white">Perfil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/logout">Logout</a>
+        </li>
+
+        {% endif %}
+
+
       </ul>
     </div>
   </div>
