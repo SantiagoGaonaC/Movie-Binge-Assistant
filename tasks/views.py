@@ -17,11 +17,10 @@ from django.http import Http404
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.contrib.auth.forms import PasswordResetForm
-from django.template.loader import render_to_string
-from django.db.models.query_utils import Q
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.messages.views import SuccessMessageMixin
+
 
 from tasks import mongodb
 
@@ -102,34 +101,12 @@ def signin(request):
         
    
 
-def password_reset_request(request):
-    
-    if request.method == 'POST':
-        password_form = PasswordResetForm(request.POST)
-        if password_form.is_valid():
-            password_form = PasswordResetForm()
-            data = password_form.cleaned_data.get[buscar_usuario('email')]
-            user_email = User.objects.filter(Q(email=data))
-        if user_email.exists():
-            for user in user_email:
-                subject = 'Password Request'
-                email_template_name = 'registration/password_message.txt'
-                parameters = {
-                    'email': user.email,
-                    'domain': '127.0.0.1:8000',
-                    'site_name': 'MovieBinge',
-                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                    'token': default_token_generator.make_token(user),
-                    'protocol': 'http',
-                }
-                email = render_to_string(email_template_name, parameters)
-                try:
-                    send_mail(subject, email, '', [user.email], fail_silently=False)
-                except: 
-                    return HttpResponse('Invalid Header')
-                return redirect('password_reset_done')            
-    else:
-        context = {
-            'password_form': password_form,
-        }
-        return render(request, 'registration/password_reset.html', context)
+class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
+    template_name = 'registration/password_reset.html'
+    email_template_name = 'registration/password_reset_email.html'
+    subject_template_name = 'registration/password_reset_subject'
+    success_message = "We've emailed you instructions for setting your password, " \
+                      "if an account exists with the email you entered. You should receive them shortly." \
+                      " If you don't receive an email, " \
+                      "please make sure you've entered the address you registered with, and check your spam folder."
+    success_url = reverse_lazy('home')
