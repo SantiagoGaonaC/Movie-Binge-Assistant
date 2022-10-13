@@ -28,14 +28,16 @@
                                 <form  method="POST">
                                     {% csrf_token %}
                                     <div class="form-outline mb-4">
-                                        <input name="email" type="email" id="inputEmail" class="form-control form-control-lg" />
                                         <label class="form-label" for="inputEmail">E-Mail</label>
+                                        <input name="email" type="email" id="inputEmail" class="form-control form-control-lg" />
+                                        
                                     </div>
 
                                     <div class="form-outline mb-4">
+                                        <label class="form-label" for="inputPw">Password</label>
                                         <input name="passwd" type="password" id="inputPw"
                                             class="form-control form-control-lg" />
-                                        <label class="form-label" for="inputPw">Password</label>
+                                        
                                     </div>
 
                                     <div style="color: red;">
@@ -44,17 +46,17 @@
 
                                     <div class="d-flex justify-content-center">
                                         <button type="submit" 
-                                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href="/" >Join</button>
+                                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href="/" >Sign In</button>
                                     </div>
-                                    <a href="{% url 'password_reset' %}">Forget Password</a>
-                                   
-
-                                    <p class="text-center text-muted mt-5 mb-0">You don't have an account yet? <a href="/signup" 
-                                            class="fw-bold text-body"><u>Sing Up here</u></a></p>
-                                            
-
+                                    <br>
+                                    <div class="card-footer text-center">
+                                        <div class="small">
+                                            <a href="{% url 'password_reset' %}">Forget Password</a>
+                                            <p class="text-center text-muted mt-5 mb-0">You don't have an account yet? <a href="/signup" 
+                                                class="fw-bold text-body"><u>Sing Up here</u></a></p>
+                                        </div>
+                                    </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>

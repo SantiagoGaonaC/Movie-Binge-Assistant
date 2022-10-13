@@ -27,25 +27,29 @@
                                 <form  method="POST">
                                     {% csrf_token %}
                                     <div class="form-outline mb-4">
-                                        <input name="name" type="text" id="inputName" class="form-control form-control-lg" />
                                         <label class="form-label" for="inputName" name="username">Name</label>
+                                        <input name="name" type="text" id="inputName" class="form-control form-control-lg" />
+                                        
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input name="email" type="email" id="inputEmail" class="form-control form-control-lg" />
                                         <label class="form-label" for="inputEmail">E-mail</label>
+                                        <input name="email" type="email" id="inputEmail" class="form-control form-control-lg" />
+                                        
                                     </div>
 
                                     <div class="form-outline mb-4">
+                                        <label class="form-label" for="inputPw">Password</label>
                                         <input type="password" id="inputPw"
                                             class="form-control form-control-lg" name="password1" />
-                                        <label class="form-label" for="inputPw">password</label>
+                                        
                                     </div>
 
                                     <div class="form-outline mb-4">
+                                        <label class="form-label" for="repeatPw" >Repeat your password</label>
                                         <input type="password" id="repeatPw"
                                             class="form-control form-control-lg" name="password2" />
-                                        <label class="form-label" for="repeatPw" >Repeat your password</label>
+                                        
                                     </div>
 
                                     <div class="d-flex justify-content-center">
