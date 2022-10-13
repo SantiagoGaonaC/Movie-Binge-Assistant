@@ -29,8 +29,9 @@ from tasks import mongodb
 
 
 def signup(request):
+    sesion = getSession(request)
     if request.method == 'GET':
-        return render(request, 'signup.html')
+        return render(request, 'signup.html', {'se': sesion})
     else:
         
         if request.POST["password1"] == request.POST["password2"]:
@@ -38,9 +39,9 @@ def signup(request):
                     insert_user(request.POST['name'],request.POST['email'],request.POST['password1'])
                     return redirect('home')
                 else:
-                    return render(request, 'signup.html', {"error": "Username already exists."})
+                    return render(request, 'signup.html', {"error": "Username already exists.", 'se': sesion})
         else:
-            return render(request, 'signup.html', {"error": "Passwords did not match."})
+            return render(request, 'signup.html', {"error": "Passwords did not match.", 'se': sesion})
 
 
 @login_required
@@ -84,12 +85,6 @@ def home(request):
     return render(request, 'home.html',  { 'pelis': datos, 'se': sesion }) 
     
 
-
-@login_required
-def signout(request):
-    logout(request)
-    return redirect('home')
-
 def perfil(request):
     sesion = getSession(request)
     if sesion == "no":
@@ -115,17 +110,18 @@ def lista_peliculas(request):
 
 
 def signin(request):
+    sesion = getSession(request)
     if request.method == 'GET':
-        return render(request, 'signin.html')
+        return render(request, 'signin.html', {'se': sesion})
     else:
         if(str(type(buscar_usuario(request.POST['email']))) == "<class 'dict'>"):
             if(login(request.POST['email'],request.POST['passwd'])):
                 createSession(request,request.POST['email'])
                 return redirect('home')
             else:
-                return render(request, 'signin.html', {"error": "Username or password is incorrect."})
+                return render(request, 'signin.html', {"error": "Username or password is incorrect.", 'se': sesion})
         else:
-            return render(request, 'signin.html', {"error": "Username not exists."})
+            return render(request, 'signin.html', {"error": "Username not exists.", 'se': sesion})
         
 
 @login_required
