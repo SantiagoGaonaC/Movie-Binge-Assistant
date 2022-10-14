@@ -114,9 +114,27 @@ body {
 .modal {
   -webkit-animation: pop-swirl 0.8s ease forwards;
   visibility: visible;
+  color: whitesmoke;
 }
 
 .modal-content {
+  background-color: #191F36;
+}
+
+.img-settings{
+  box-shadow: 0px 1px 5px #fff;
+  
+  display: block;
+  margin: auto;
+}
+
+.title-date{
+  color: #cfcfd3;
+}
+.title-modal{
+  color: white;
+  font-weight: bolder;
+  font-size: 43310px;
 }
 
 @keyframes pop-swirl {

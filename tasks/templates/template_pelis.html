@@ -15,28 +15,46 @@
         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalToggleLabel">{{m.title}}</h5>
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="modal-title" id="exampleModalToggleLabel">{{m.title}}</h5>
+                            
+                        </div>
+                        <div class="col">
+                            <h5 class="modal-title" id="exampleModalToggleLabel">({{m.release_date}})</h5>
+                        </div>
+                    </div>
+                    
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <img src="https://imgmovies.blob.core.windows.net/movies-img/{{m.imdb_id}}.jpg">
-                                <div>{{m.release_date}}</div>
+                                    <img class="img-settings" src="https://imgmovies.blob.core.windows.net/movies-img/{{m.imdb_id}}.jpg">
+                                <div class="row asd">
+                                    
+                                </div>
+                                                                
                             </div>
-                            <div class="col">{{m.overview}}</div>
+                            <div class="col">
+                                <div class="row mb-4">
+                                    {{m.overview}}
+                                </div>
+                                
+                                <div class="row mb-4">
+                                    <div class="col ">Genre: {{m.genres}}</div>
+                                    <div class="col ">Language: {{m.spoken_languages}}</div>
+                                    <div class="col ">Length: {{m.runtime}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col ">Vote Average: {{m.vote_average}}</div>
+                                    <div class="col ">Vote count: {{m.vote_count}}</div>
+                                    <div class="col ">Popularity: {{m.popularity}}</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col border">Genre: {{m.genres}}</div>
-                            <div class="col border">Language: {{m.spoken_languages}}</div>
-                            <div class="col border">Length: {{m.runtime}}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col border">Vote Average: {{m.vote_average}}</div>
-                            <div class="col border">Vote count: {{m.vote_count}}</div>
-                            <div class="col border">Popularity: {{m.popularity}}</div>
-                        </div>
+                        
                         <div class="row text-center">
                             <div class="col border">X X X X X</div>
                         </div>
