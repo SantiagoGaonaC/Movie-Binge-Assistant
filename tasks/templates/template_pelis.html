@@ -1,69 +1,74 @@
 {% load static %}
-    <a class="Posters-link shadow p-3 mb-5 rounded"  data-bs-toggle="modal" data-bs-target="#{{m.imdb_id}}">
-          
-        <img src="https://imgmovies.blob.core.windows.net/movies-img/{{m.imdb_id}}.jpg" class="card-img-top btn-img" alt="{{ m.original_title}"  width="154" height="331">
-        <br>
-        <div class="listing-content" >
-          <p class="content-p ">{{m.original_title}}({{m.release_date.6}}{{m.release_date.7}}{{m.release_date.8}}{{m.release_date.9}})</p>
-        <p class="content-p" >genders: {{m.genres}}</p>
-        <p class="content-p " style="color: #30cf30;"><i class="bi bi-star-fill" style="color: #ffdf00;border-color: black;border: 10px;"></i>{{m.vote_average}}/10</p>
-        </div>
-        
-    </a>
+<a class="Posters-link shadow p-3 mb-5 rounded" data-bs-toggle="modal" data-bs-target="#{{m.imdb_id}}">
 
-    <div class="modal fade" id="{{m.imdb_id}}" aria-hidden="true" aria-labelledby="exampleModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
+    <img src="https://imgmovies.blob.core.windows.net/movies-img/{{m.imdb_id}}.jpg" class="card-img-top btn-img"
+        alt="{{ m.original_title}" width="154" height="331">
+    <br>
+    <div class="listing-content">
+        <p class="content-p ">
+            {{m.original_title}}({{m.release_date.6}}{{m.release_date.7}}{{m.release_date.8}}{{m.release_date.9}})</p>
+        <p class="content-p">genders: {{m.genres}}</p>
+        <p class="content-p " style="color: #30cf30;"><i class="bi bi-star-fill"
+                style="color: #ffdf00;border-color: black;border: 10px;"></i>{{m.vote_average}}/10</p>
+    </div>
+
+</a>
+
+<div class="modal fade" id="{{m.imdb_id}}" aria-hidden="true" aria-labelledby="exampleModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="modal-title" id="exampleModalToggleLabel">{{m.title}}</h5>
+
+                    </div>
+                    <div class="col">
+                        <h5 class="modal-title" id="exampleModalToggleLabel">({{m.release_date}})</h5>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col">
-                            <h5 class="modal-title" id="exampleModalToggleLabel">{{m.title}}</h5>
-                            
+                            <img class="img-settings"
+                                src="https://imgmovies.blob.core.windows.net/movies-img/{{m.imdb_id}}.jpg">
+                            <div class="row asd">
+
+                            </div>
+
                         </div>
                         <div class="col">
-                            <h5 class="modal-title" id="exampleModalToggleLabel">({{m.release_date}})</h5>
-                        </div>
-                    </div>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col">
-                                    <img class="img-settings" src="https://imgmovies.blob.core.windows.net/movies-img/{{m.imdb_id}}.jpg">
-                                <div class="row asd">
-                                    
-                                </div>
-                                                                
+                            <div class="row mb-4">
+                                {{m.overview}}
                             </div>
-                            <div class="col">
-                                <div class="row mb-4">
-                                    {{m.overview}}
-                                </div>
-                                
-                                <div class="row mb-4">
-                                    <div class="col ">Genre: {{m.genres}}</div>
-                                    <div class="col ">Language: {{m.spoken_languages}}</div>
-                                    <div class="col ">Time: {{m.runtime}}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col ">Vote Average: {{m.vote_average}}</div>
-                                    <div class="col ">Vote count: {{m.vote_count}}</div>
-                                    <div class="col ">Popularity: {{m.popularity}}</div>
-                                </div>
+
+                            <div class="row mb-4">
+                                <div class="col ">Genre: {{m.genres}}</div>
+                                <div class="col ">Language: {{m.spoken_languages}}</div>
+                                <div class="col ">Time: {{m.runtime}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col ">Vote Average: {{m.vote_average}}</div>
+                                <div class="col ">Vote count: {{m.vote_count}}</div>
+                                <div class="col ">Popularity: {{m.popularity}}</div>
                             </div>
                         </div>
-                        
-                        <div class="row text-center">
-                            <div class="col border">X X X X X</div>
-                        </div>
+                    </div>
+
+                    <div class="row text-center">
+                        <div class="col border">X X X X X</div>
+                        <div class="col stars-rating-wrapper"></div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
-                        data-bs-dismiss="modal">Exit</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+                    data-bs-dismiss="modal">Exit</button>
             </div>
         </div>
     </div>
+</div>
