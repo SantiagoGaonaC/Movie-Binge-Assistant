@@ -22,32 +22,32 @@
 
 <div class="d-flex align-items-center justify-content-center">
   <br>
-  <a class="btn btn-primary" href="/pelis">See more</a>
+  <a class="btn btn-see-more" href="/pelis">See more</a>
   <br>
 </div>
 
 <script>
 
   function estrellas(id) {
-  const star = ".star-"+id
-  const ra = ".rating-"+id
-  const allStars = document.querySelectorAll(star);
-  let current_rating = document.querySelector(ra);
-  allStars.forEach((star, i) => {
+    const star = ".star-" + id
+    const ra = ".rating-" + id
+    const allStars = document.querySelectorAll(star);
+    let current_rating = document.querySelector(ra);
+    allStars.forEach((star, i) => {
       star.onclick = function () {
-          let current_star_level = i + 1;
-          current_rating.innerHTML = `${current_star_level} of 5`;
-          //current_star_level = NUMBER
-          console.log("Tipo de dato: " + typeof current_star_level);
-          allStars.forEach((star, j) => {
-              if (current_star_level >= j + 1) {
-                  star.innerHTML = "&#9733";
-              } else {
-                  star.innerHTML = "&#9734";
-              }
-          });
+        let current_star_level = i + 1;
+        current_rating.innerHTML = `${current_star_level} of 5`;
+        //current_star_level = NUMBER
+        console.log("Tipo de dato: " + typeof current_star_level);
+        allStars.forEach((star, j) => {
+          if (current_star_level >= j + 1) {
+            star.innerHTML = "&#9733";
+          } else {
+            star.innerHTML = "&#9734";
+          }
+        });
       };
-  });
+    });
   };
 
 </script>

@@ -161,4 +161,18 @@ body {
 .btn-modal-footer {
   color: #cfcfd3;
   background-color: #e81b47;
+  transition: all 0.3s ease-in-out;
+}
+.btn-modal-footer:hover {
+  transform: scale(1.1);
+}
+
+.btn-see-more {
+  color: white;
+  background-color: #e81b47;
+  transition: all 0.3s ease-in-out;
+}
+.btn-see-more:hover {
+  transform: scale(1.1);
+  color: white;
 }
