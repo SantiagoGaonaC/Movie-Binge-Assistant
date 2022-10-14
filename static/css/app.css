@@ -118,20 +118,20 @@ body {
 }
 
 .modal-content {
-  background-color: #191F36;
+  background-color: #191f36;
 }
 
-.img-settings{
+.img-settings {
   box-shadow: 0px 1px 5px #fff;
-  
+
   display: block;
   margin: auto;
 }
 
-.title-date{
+.title-date {
   color: #cfcfd3;
 }
-.title-modal{
+.title-modal {
   color: white;
   font-weight: bolder;
   font-size: 43310px;
@@ -144,4 +144,21 @@ body {
   100% {
     transform: scale(1);
   }
+}
+
+.star-rating {
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.star {
+  font-size: 3rem;
+  color: #ff9800;
+  background-color: unset;
+  border: none;
+}
+
+.star:hover {
+  cursor: pointer;
 }

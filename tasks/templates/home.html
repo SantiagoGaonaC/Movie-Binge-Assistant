@@ -1,9 +1,6 @@
-
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-
 
 <div class="container ">
 
@@ -13,8 +10,8 @@
     <div class="Posters">
       {% for m in pelis %}
       <div class="">
-        
-          {% include 'template_pelis.html' %}
+
+        {% include 'template_pelis.html' %}
       </div>
       {% endfor %}
     </div>
@@ -22,12 +19,12 @@
 </div>
 
 
-    
-    <div class="d-flex align-items-center justify-content-center">
-      <br>
-      <a class="btn btn-primary" href="/pelis">See more</a>
-      <br>
-    </div>
+
+<div class="d-flex align-items-center justify-content-center">
+  <br>
+  <a class="btn btn-primary" href="/pelis">See more</a>
+  <br>
+</div>
 
 {% include 'footer.html' %}
 
