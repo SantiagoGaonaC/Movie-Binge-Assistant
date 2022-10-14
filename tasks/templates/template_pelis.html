@@ -1,5 +1,6 @@
 {% load static %}
-<a class="Posters-link shadow p-3 mb-5 rounded" data-bs-toggle="modal" data-bs-target="#{{m.imdb_id}}" onclick="estrellas('{{m.imdb_id}}')">
+<a class="Posters-link shadow p-3 mb-5 rounded" data-bs-toggle="modal" data-bs-target="#{{m.imdb_id}}"
+    onclick="estrellas('{{m.imdb_id}}')">
 
     <img src="https://imgmovies.blob.core.windows.net/movies-img/{{m.imdb_id}}.jpg" class="card-img-top btn-img"
         alt="{{ m.original_title}" width="154" height="331">
@@ -22,47 +23,43 @@
                     <div class="col">
                     </div>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- <button type="button" class="btn-close btn-close-color" data-bs-dismiss="modal"
+                    aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">
-                            <img class="img-settings"
+                            <img class="img-settings rounded mx-auto d-block"
                                 src="https://imgmovies.blob.core.windows.net/movies-img/{{m.imdb_id}}.jpg">
-                            <div class="row asd">
-
-                            </div>
-
                         </div>
                         <div class="col">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="modal-title" id="exampleModalToggleLabel">{{m.title}}</h5>
-
+                                    <h5 class="title-modal" id="exampleModalToggleLabel">{{m.title}}</h5>
                                 </div>
-                                <div class="col">
-                                    <h5 class="modal-title" id="exampleModalToggleLabel">({{m.release_date}})</h5>
-                                </div>
-                            </div>
-
-                            <div class="row mb-4">
-                                {{m.overview}}
-                            </div>
-
-                            <div class="row mb-4">
-                                <div class="col ">Genre: {{m.genres}}</div>
-                                <div class="col ">Language: {{m.spoken_languages}}</div>
-                                <div class="col ">Time: {{m.runtime}}</div>
                             </div>
                             <div class="row">
-                                <div class="col ">Vote Average: {{m.vote_average}}</div>
-                                <div class="col ">Vote count: {{m.vote_count}}</div>
-                                <div class="col ">Popularity: {{m.popularity}}</div>
+                                <div class="col">
+                                    <h5 class="title-date" id="exampleModalToggleLabel">({{m.release_date}})</h5>
+                                </div>
+                                <div class="col">
+                                    <h5 class="title-genres" id="exampleModalToggleLabel">{{m.genres}}</h5>
+                                </div>
+                            </div>
+                            <div class="row tagline">
+                                <p>{{m.tagline}}</p>
+                            </div>
+                            <div class="row mb-4 overview">
+                                {{m.overview}}
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col ">{{m.spoken_languages}}</div>
+                                <div class="col ">IMDb: {{m.vote_average}}/10</div>
+                                <div class="col ">{{m.runtime}} minutes</div>
                             </div>
                         </div>
                     </div>
-
                     <div class="row text-center">
                         <div class="col star-rating">
                             <button class="star star-{{m.imdb_id}}">&#9734;</button>
@@ -73,11 +70,10 @@
                             <p class="current_rating rating-{{m.imdb_id}}">0 of 5</p>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+                <button class="btn btn-modal-footer" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
                     data-bs-dismiss="modal">Exit</button>
             </div>
         </div>

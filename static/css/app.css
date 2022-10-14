@@ -116,6 +116,9 @@ body {
   visibility: visible;
   color: whitesmoke;
 }
+.btn-close-color {
+  background-color: #e81b47;
+}
 
 .modal-content {
   background-color: #191f36;
@@ -123,9 +126,6 @@ body {
 
 .img-settings {
   box-shadow: 0px 1px 5px #fff;
-
-  display: block;
-  margin: auto;
 }
 
 .title-date {
@@ -134,7 +134,7 @@ body {
 .title-modal {
   color: white;
   font-weight: bolder;
-  font-size: 43310px;
+  font-size: 1.5em;
 }
 
 @keyframes pop-swirl {
@@ -161,4 +161,21 @@ body {
 
 .star:hover {
   cursor: pointer;
+}
+
+.tagline {
+  font-style: italic;
+}
+.overview {
+  text-align: justify;
+}
+
+.title-genres {
+  align-self: center;
+  color: #cfcfd3;
+}
+
+.btn-modal-footer {
+  color: #cfcfd3;
+  background-color: #e81b47;
 }
