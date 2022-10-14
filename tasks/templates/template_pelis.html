@@ -1,5 +1,5 @@
 {% load static %}
-<a class="Posters-link shadow p-3 mb-5 rounded" data-bs-toggle="modal" data-bs-target="#{{m.imdb_id}}">
+<a class="Posters-link shadow p-3 mb-5 rounded" data-bs-toggle="modal" data-bs-target="#{{m.imdb_id}}" onclick="estrellas('{{m.imdb_id}}')">
 
     <img src="https://imgmovies.blob.core.windows.net/movies-img/{{m.imdb_id}}.jpg" class="card-img-top btn-img"
         alt="{{ m.original_title}" width="154" height="331">
@@ -65,12 +65,12 @@
 
                     <div class="row text-center">
                         <div class="col star-rating">
-                            <button class="star">&#9734;</button>
-                            <button class="star">&#9734;</button>
-                            <button class="star">&#9734;</button>
-                            <button class="star">&#9734;</button>
-                            <button class="star">&#9734;</button>
-                            <p class="current_rating">0 of 5</p>
+                            <button class="star star-{{m.imdb_id}}">&#9734;</button>
+                            <button class="star star-{{m.imdb_id}}">&#9734;</button>
+                            <button class="star star-{{m.imdb_id}}">&#9734;</button>
+                            <button class="star star-{{m.imdb_id}}">&#9734;</button>
+                            <button class="star star-{{m.imdb_id}}">&#9734;</button>
+                            <p class="current_rating rating-{{m.imdb_id}}">0 of 5</p>
                         </div>
                     </div>
 
@@ -83,22 +83,3 @@
         </div>
     </div>
 </div>
-<script>
-    const allStars = document.querySelectorAll(".star");
-    let current_rating = document.querySelector('.current_rating');
-    allStars.forEach((star, i) => {
-        star.onclick = function () {
-            let current_star_level = i + 1;
-            current_rating.innerHTML = `${current_star_level} of 5`;
-            //current_star_level = NUMBER
-            console.log("Tipo de dato: " + typeof current_star_level);
-            allStars.forEach((star, j) => {
-                if (current_star_level >= j + 1) {
-                    star.innerHTML = "&#9733";
-                } else {
-                    star.innerHTML = "&#9734";
-                }
-            });
-        };
-    });
-</script>
