@@ -45,6 +45,24 @@ def login(email,passwd):
         print("usuario no registrado")
     
 
+def peliculas():
+    cliente = conexion()
+    pelis = cliente["moviesimdb"]["movies"]
+    pel = pelis.find()
+    pelicuas_busquedad = []
+    for a in pel:
+        pelicuas_busquedad.append(a)
+    cliente.close()
+    return pelicuas_busquedad
 
+def buscar_pelicula(text):
+    cliente = conexion()
+    pelis = cliente["moviesimdb"]["movies"]
+    pelicuas_busquedad = []
+    pel = pelis.find({ 'title' : {"$regex": '.*'+text+'.*', "$options" :'i'} })
+    for a in pel:
+        pelicuas_busquedad.append(a)
+    cliente.close()
+    return pelicuas_busquedad
     
 

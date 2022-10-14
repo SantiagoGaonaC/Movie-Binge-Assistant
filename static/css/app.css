@@ -112,7 +112,7 @@ body {
 }
 
 .modal {
-  -webkit-animation: pop-swirl 0.8s ease forwards;
+  -webkit--animation: pop-swirl 0.8s ease forwards;
   visibility: visible;
   color: whitesmoke;
 }
