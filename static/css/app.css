@@ -1,5 +1,5 @@
 body {
-  background-color: #084c61;
+  background-color: #080f28;
 }
 
 .gradient-custom-3 {
@@ -44,19 +44,17 @@ body {
 }
 
 .Posters {
-
   display: -ms-flexbox;
   display: flex;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
   margin: 0 0rem;
-  background-color: #084C61;
-
+  background-color: #080f28;
 }
 
 .Posters-link {
   text-decoration: none;
-  background-color: #4F6D7A;
+  background-color: #080f28;
   margin: 0 10px;
   display: inline-block;
   color: white;
@@ -66,14 +64,11 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
 }
 
-.Posters-link:hover{
+.Posters-link:hover {
   cursor: pointer;
   border: white 1px solid;
-  
-
 }
 
 .listing-content {
@@ -82,15 +77,15 @@ body {
   border-radius: 0px;
   overflow: hidden;
   -webkit-box-shadow: 10px 10px 40px 0 rgb(52 58 64 / 10%);
-  -moz-box-shadow: 10px 10px 40px 0 rgba(52,58,64,.1);
+  -moz-box-shadow: 10px 10px 40px 0 rgba(52, 58, 64, 0.1);
   box-shadow: 10px 10px 40px 0 rgb(52 58 64 / 10%);
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  -ms-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  transition: all .3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
   padding: 7px;
-  background-color: #4F6D7A
+  background-color: #080f28;
 }
 
 .content-p {
@@ -104,10 +99,31 @@ body {
 }
 
 .footer {
-  background-color: #212529;
+  background-color: #080f28;
   color: white;
 }
 
 .footer button {
-  background-color: #212529;
+  background-color: #080f28;
+}
+
+.navfoot-color {
+  background-color: #141b33;
+}
+
+.modal {
+  -webkit-animation: pop-swirl 0.8s ease forwards;
+  visibility: visible;
+}
+
+.modal-content {
+}
+
+@keyframes pop-swirl {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
