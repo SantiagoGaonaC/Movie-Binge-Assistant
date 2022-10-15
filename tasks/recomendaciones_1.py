@@ -7,9 +7,6 @@ import math
 def recomendacion(peliculas, user):
     movies_df = pd.DataFrame(peliculas)
 
-
-    movies_df.head(10)
-
     #creamos una columna nueva que se llamará year
     movies_df['year'] = movies_df.title.str.extract('(\(\d\d\d\d\))',expand=False)
     #Quitando los paréntesis 
@@ -27,6 +24,8 @@ def recomendacion(peliculas, user):
     for index, row in movies_df.iterrows():
         for genre in row['genres']:
             movies_df_copy.at[index,genre] = 1
+
+    print(movies_df_copy)
 
     movies_df_copy = movies_df_copy.fillna(0)
     inputMovies = pd.DataFrame(user)

@@ -1,22 +1,13 @@
 
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.models import User
-from django.db import IntegrityError
-from django.utils import timezone
-from django.contrib.auth.decorators import login_required
-from .models import Task
 from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login, peliculas, buscar_pelicula, peliculas_user
-from .forms import TaskForm
+
 from .session import createSession, getSession, deleteSession
 from django.core.paginator import Paginator
 import json
 from django.http import Http404
 from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
-from django.contrib.auth.forms import PasswordResetForm
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
@@ -48,7 +39,10 @@ def signup(request):
 def buscar(request):
     sesion = getSession(request)
     if request.method == 'POST':
-        p = buscar_pelicula(request.POST['search'])
+        if(request.POST['search'] == ""):
+            p = Peliculas
+        else:
+            p = buscar_pelicula(request.POST['search'])
         request.session['search'] = request.POST['search']
         page = request.GET.get('page',1)
         try:
@@ -79,10 +73,6 @@ def logout(request):
 def home(request):
 
     sesion = getSession(request)
-    #input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
-
-    #pelis = peliculas()
-    #Peliculas = pelis
     datos = []
     for p in range(0,12):
         datos.append(Peliculas[p])
@@ -98,9 +88,7 @@ def perfil(request):
         return render(request, 'login/perfil.html', {'data': buscar_usuario(sesion), 'len':len(buscar_usuario(sesion)['pelis']) } )
 
 def lista_peliculas(request):
-    #input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
-    #pelis = json.load(input_file)
-    #pelis = peliculas()
+
     pelis = Peliculas
     page = request.GET.get('page',1)
     sesion = getSession(request)

@@ -55,8 +55,6 @@ def peliculas():
     return a
 
 def buscar_pelicula(text):
-    if(text == ""):
-        return peliculas()
     cliente = conexion()
     pelis = cliente["moviesimdb"]["movies"]
     pel = pelis.find({ 'title' : {"$regex": '.*'+text+'.*', "$options" :'i'} })
