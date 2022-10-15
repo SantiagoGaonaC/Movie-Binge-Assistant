@@ -176,3 +176,13 @@ body {
   transform: scale(1.1);
   color: white;
 }
+
+.page-item.active .page-link {
+  color: #fff !important;
+  background: #e81b47 !important;
+}
+
+.page-link {
+  background-color: #080f28;
+  color: white;
+}
