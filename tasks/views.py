@@ -1,5 +1,5 @@
 
-import re
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
@@ -8,7 +8,7 @@ from django.db import IntegrityError
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .models import Task
-from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login
+from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login, peliculas, buscar_pelicula
 from .forms import TaskForm
 from .session import createSession, getSession, deleteSession
 from django.core.paginator import Paginator
@@ -21,11 +21,14 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
 
+from django.middleware.csrf import get_token
 
-from tasks import mongodb
 
 # Create your views here.
 
+
+
+Peliculas = peliculas()
 
 def signup(request):
     sesion = getSession(request)
@@ -43,6 +46,30 @@ def signup(request):
             return render(request, 'signup.html', {"error": "Passwords did not match.", 'se': sesion})
 
 
+def buscar(request):
+    sesion = getSession(request)
+    if request.method == 'POST':
+        p = buscar_pelicula(request.POST['search'])
+        request.session['search'] = request.POST['search']
+        page = request.GET.get('page',1)
+        try:
+            paginator = Paginator(p, 12)
+            pelis = paginator.page(page)
+        except:
+            raise Http404
+
+        return render(request, 'busquedad.html', { 'pelis': pelis, 'se': sesion })
+    else:
+
+        p = buscar_pelicula(request.session['search'])
+        page = request.GET.get('page',1)
+        try:
+            paginator = Paginator(p, 12)
+            pelis = paginator.page(page)
+        except:
+            raise Http404
+
+        return render(request, 'busquedad.html', { 'pelis': pelis, 'se': sesion })
 
 
 def logout(request):
@@ -51,12 +78,15 @@ def logout(request):
 
 
 def home(request):
+
     sesion = getSession(request)
-    input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
-    pelis = json.load(input_file)
+    #input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
+
+    #pelis = peliculas()
+    #Peliculas = pelis
     datos = []
     for p in range(0,12):
-        datos.append(pelis[p])
+        datos.append(Peliculas[p])
 
     return render(request, 'home.html',  { 'pelis': datos, 'se': sesion }) 
     
@@ -69,18 +99,19 @@ def perfil(request):
         return render(request, 'login/perfil.html', {'data': buscar_usuario(sesion), 'len':len(buscar_usuario(sesion)['pelis']) } )
 
 def lista_peliculas(request):
-    input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
-    pelis = json.load(input_file)
+    #input_file = open ('tasks/data/pelis_clean.json', encoding="utf8")
+    #pelis = json.load(input_file)
+    #pelis = peliculas()
+    pelis = Peliculas
     page = request.GET.get('page',1)
     sesion = getSession(request)
     try:
-        paginator = Paginator(pelis, 12)
+        paginator = Paginator(Peliculas, 12)
         pelis = paginator.page(page)
     except:
         raise Http404
 
     return render(request, 'pelis.html', { 'pelis': pelis, 'se': sesion })
-
 
 
 

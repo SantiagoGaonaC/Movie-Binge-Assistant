@@ -8,6 +8,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
+
+        <div class="container-fluid">
+          <form class="d-flex"  method="POST" action="/search/">
+            {% csrf_token %}
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+
         <li class="nav-item">
           <a href="/" class="nav-link text-white">Home</a>
         </li>
