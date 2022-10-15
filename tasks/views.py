@@ -1,7 +1,7 @@
 
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login, peliculas, buscar_pelicula, peliculas_user
+from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login, peliculas, buscar_pelicula, peliculas_user, genres, buscar_peli_id
 
 from .session import createSession, getSession, deleteSession
 from django.core.paginator import Paginator
@@ -19,6 +19,7 @@ from .recomendaciones_1 import recomendacion
 
 
 Peliculas = peliculas()
+Genres = genres()
 
 def signup(request):
     sesion = getSession(request)
@@ -137,8 +138,12 @@ def algoritmo_ia(request):
                 pel.append(nuevas_pelis[p])
             return render(request, 'recomendaciones.html', { 'pelis': pel})
         else:
-            pelis = recomendacion(Peliculas,userInput)
-            return render(request, 'recomendaciones.html', { 'pelis': pelis})
+            pel = []
+            pelis = recomendacion(Peliculas,userInput, Genres)
+            for i in pelis:
+                pel.append(buscar_peli_id(i))
+        
+            return render(request, 'recomendaciones.html', { 'pelis': pel})
     else:
         return redirect('signin')
     

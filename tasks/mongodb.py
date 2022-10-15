@@ -78,9 +78,19 @@ def peliculas_user(email,title,ranking):
     users_col = cliente["moviesimdb"]["users"]
     users_col.update_one({'email': email}, { '$set': {'pelis': array}})
 
+def genres():
+    cliente = conexion()
+    pelis = cliente["moviesimdb"]["movies_genres_matrix"]
+    pel = pelis.find()
+    a = list(pel)
+    return a
+
+def buscar_peli_id(text):
+    cliente = conexion()
+    pelis = cliente["moviesimdb"]["movies"]
+    pel = pelis.find_one({ 'imdb_id' : text })
+
+    return pel
 
 
-
-
-    
 
