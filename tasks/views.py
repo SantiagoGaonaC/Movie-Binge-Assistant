@@ -8,7 +8,7 @@ from django.db import IntegrityError
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .models import Task
-from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login, peliculas, buscar_pelicula
+from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login, peliculas, buscar_pelicula, peliculas_user
 from .forms import TaskForm
 from .session import createSession, getSession, deleteSession
 from django.core.paginator import Paginator
@@ -21,8 +21,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
 
-from django.middleware.csrf import get_token
-
+from .recomendaciones_1 import recomendacion
 
 # Create your views here.
 
@@ -129,8 +128,35 @@ def signin(request):
                 return render(request, 'signin.html', {"error": "Username or password is incorrect.", 'se': sesion})
         else:
             return render(request, 'signin.html', {"error": "Username not exists.", 'se': sesion})
-        
-   
+    
+def raking_user(request):
+
+    if request.method == "GET":
+        sesion = getSession(request)
+        title = request.GET['title']
+        rating = request.GET['rating']
+        peliculas_user(sesion,title,int(rating))
+
+
+def algoritmo_ia(request):
+    sesion = getSession(request)
+    if sesion != "no":
+        userInput = buscar_usuario(sesion)['pelis']
+        if len(userInput) == 0:
+            nuevas_pelis = sorted(Peliculas, key=lambda t: t['vote_average'])
+            pel = []
+            for p in range(0,12):
+                pel.append(nuevas_pelis[p]) 
+            return render(request, 'recomendaciones.html', { 'pelis': pel})
+        else:
+            pelis = recomendacion(Peliculas,userInput)
+            return render(request, 'recomendaciones.html', { 'pelis': pelis})
+    else:
+        return redirect('signin')
+    
+
+
+
 
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
     template_name = 'registration/password_reset.html'

@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from cryptography.fernet import Fernet
 
 def conexion():
-    cliente =  MongoClient('mongodb+srv://omarn:Vegeta1234@movies.maq9nom.mongodb.net/?retryWrites=true&w=majority')
+    cliente =  MongoClient('mongodb+srv://omarn:Movies-Binge@movies.maq9nom.mongodb.net/?retryWrites=true&w=majority')
     return cliente
 
 def verficiar_user_repetido(email):
@@ -62,5 +62,27 @@ def buscar_pelicula(text):
     pel = pelis.find({ 'title' : {"$regex": '.*'+text+'.*', "$options" :'i'} })
     pelicuas_busquedad = list(pel)
     return pelicuas_busquedad
+
+def peliculas_user(email,title,ranking):
+    user = buscar_usuario(email)
+    array = user['pelis']
+    j = {'title': title, 'rating': ranking}
+    booleano = True
+    for i in range(0,len(array)):
+        if array[i]['title'] == title:
+            booleano = False
+            array[i]['rating'] = ranking
+            break
+    if booleano:
+        array.append(j)
+
+    cliente = conexion()
+    users_col = cliente["moviesimdb"]["users"]
+    users_col.update_one({'email': email}, { '$set': {'pelis': array}})
+
+
+
+
+
     
 

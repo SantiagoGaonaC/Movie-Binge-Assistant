@@ -30,7 +30,11 @@
                         {% if len == 0 %}
                             <h5>No ha seleccionado peliculas</h5>
                         {% else %}
-                            <h5>Si hay xd</h5>
+                            <ul>
+                            {% for m in data.pelis %}
+                                <li>{{m.title}}</li>
+                            {% endfor %}
+                            </ul>
                         {% endif %}
 
                         

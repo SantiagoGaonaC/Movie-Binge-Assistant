@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-movies_df = pd.read_csv('movies.csv')
-ratings_df = pd.read_csv('ratings.csv')
+movies_df = pd.read_csv('C:/Users/omarn/OneDrive/Escritorio/Nueva carpeta/Sexto Semestre/PI 2/movies.csv')
+print(movies_df)
 
 movies_df.head(10)
 
@@ -16,7 +16,6 @@ movies_df['year'] = movies_df.year.str.extract('(\d\d\d\d)',expand=False)
 movies_df['title'] = movies_df.title.str.replace(' (\(\d\d\d\d\))', '')
 movies_df['genres'] = movies_df.genres.str.split('|')
 
-ratings_df = ratings_df.drop("timestamp",1)
 
 movies_df.head(10)
 

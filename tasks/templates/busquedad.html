@@ -84,30 +84,43 @@
     </ul>
   </nav>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
   <script>
 
-    function estrellas(id) {
-      const star = ".star-" + id
-      const ra = ".rating-" + id
-      const allStars = document.querySelectorAll(star);
-      let current_rating = document.querySelector(ra);
-      allStars.forEach((star, i) => {
-        star.onclick = function () {
-          let current_star_level = i + 1;
-          current_rating.innerHTML = `${current_star_level} of 5`;
-          //current_star_level = NUMBER
-          console.log("Tipo de dato: " + typeof current_star_level);
-          allStars.forEach((star, j) => {
-            if (current_star_level >= j + 1) {
-              star.innerHTML = "&#9733";
-            } else {
-              star.innerHTML = "&#9734";
-            }
-          });
-        };
-      });
-    };
+function user_rating(id){
+    $.ajax({
+        url: "{% url 'ranking_user' %}",
+        method: 'GET',
+        data : {
+            'title':document.getElementById('title-'+id).value,
+        'rating': document.getElementById('ra-'+id).value}
+    });
+    document.getElementById('exit-'+id).click()
+}
+
+function estrellas(id) {
+    const star = ".star-" + id
+    const ra = ".rating-" + id
+    const ti = "title-"+id
+    const allStars = document.querySelectorAll(star);
+    let current_rating = document.querySelector(ra);
+    allStars.forEach((star, i) => {
+      star.onclick = function () {
+        let current_star_level = i + 1;
+        current_rating.innerHTML = `${current_star_level} of 5`;
+        document.getElementById('ra-'+id).value = current_star_level
+
+        allStars.forEach((star, j) => {
+          if (current_star_level >= j + 1) {
+            star.innerHTML = "&#9733";
+          } else {
+            star.innerHTML = "&#9734";
+          }
+        });
+      };
+    });
+  };
   
   </script>
 
