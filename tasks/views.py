@@ -146,7 +146,7 @@ def algoritmo_ia(request):
             nuevas_pelis = sorted(Peliculas, key=lambda t: t['vote_average'])
             pel = []
             for p in range(0,12):
-                pel.append(nuevas_pelis[p]) 
+                pel.append(nuevas_pelis[p])
             return render(request, 'recomendaciones.html', { 'pelis': pel})
         else:
             pelis = recomendacion(Peliculas,userInput)
