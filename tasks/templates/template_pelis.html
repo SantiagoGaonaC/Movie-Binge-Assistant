@@ -1,7 +1,6 @@
 {% load static %}
 <a class="Posters-link shadow p-3 mb-5 rounded" data-bs-toggle="modal" data-bs-target="#{{m.imdb_id}}"
     onclick="estrellas('{{m.imdb_id}}')">
-
     <img src="https://imgmovies.blob.core.windows.net/movies-img/{{m.imdb_id}}.jpg" class="card-img-top btn-img"
         alt="{{ m.original_title}}" width="154" height="331">
     <br>
@@ -12,7 +11,6 @@
         <p class="content-p " style="color: #30cf30;"><i class="bi bi-star-fill"
                 style="color: #ffdf00;border-color: black;border: 10px;"></i>{{m.vote_average}}/10</p>
     </div>
-
 </a>
 
 <div class="modal fade" id="{{m.imdb_id}}" aria-hidden="true" aria-labelledby="exampleModal" tabindex="-1">
@@ -70,15 +68,16 @@
                             <p class="current_rating rating-{{m.imdb_id}}">0 of 5</p>
                             {% if se != "no" %}
                             <input id="title-{{m.imdb_id}}" type="text" value="{{m.title}}" hidden>
-                            <button id="ra-{{m.imdb_id}}" onclick="user_rating('{{m.imdb_id}}')" class="btn btn-modal-footer">Send Rating</button>
+                            <button id="ra-{{m.imdb_id}}" onclick="user_rating('{{m.imdb_id}}')"
+                                class="btn btn-modal-footer">Send Rating</button>
                             {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="exit-{{m.imdb_id}}" class="btn btn-modal-footer" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
-                    data-bs-dismiss="modal">Exit</button>
+                <button id="exit-{{m.imdb_id}}" class="btn btn-modal-footer" data-bs-target="#exampleModalToggle2"
+                    data-bs-toggle="modal" data-bs-dismiss="modal">Exit</button>
             </div>
         </div>
     </div>

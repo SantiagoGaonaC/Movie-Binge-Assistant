@@ -209,3 +209,12 @@ body {
     box-shadow: 0 0 0 35px rgba(0, 0, 0, 0), 0 0 0 15px rgba(29, 171, 209, 0);
   }
 }
+
+.btn-search-navbar {
+  color: #cfcfd3;
+  background-color: #e81b47;
+}
+.btn-search-navbar:hover {
+  color: #cfcfd3;
+  background-color: #080f28;
+}
