@@ -186,3 +186,26 @@ body {
   background-color: #080f28;
   color: white;
 }
+
+.animation-img {
+  animation: animacion 3s linear infinite;
+  border-radius: 20%;
+}
+
+@keyframes animacion {
+  0% {
+    box-shadow: 0 0 0 0 rgba(2, 2, 3, 0.6), 0 0 0 0 rgba(0, 0, 0, 0.6);
+  }
+
+  30% {
+    box-shadow: 0 0 0 30px rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0.6);
+  }
+
+  65% {
+    box-shadow: 0 0 0 30px rgba(0, 0, 0, 0), 0 0 0 15px rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 35px rgba(0, 0, 0, 0), 0 0 0 15px rgba(29, 171, 209, 0);
+  }
+}
