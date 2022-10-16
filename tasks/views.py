@@ -11,7 +11,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
-
+from django.views.decorators.csrf import csrf_protect
 from .recomendaciones_1 import recomendacion
 
 # Create your views here.
@@ -21,6 +21,7 @@ from .recomendaciones_1 import recomendacion
 Peliculas = peliculas()
 Genres = genres()
 
+@csrf_protect
 def signup(request):
     sesion = getSession(request)
     if request.method == 'GET':
@@ -36,7 +37,7 @@ def signup(request):
         else:
             return render(request, 'signup.html', {"error": "Passwords did not match.", 'se': sesion})
 
-
+@csrf_protect
 def buscar(request):
     sesion = getSession(request)
     if request.method == 'POST':
@@ -70,7 +71,7 @@ def logout(request):
     deleteSession(request)
     return redirect('home')
 
-
+@csrf_protect
 def home(request):
 
     sesion = getSession(request)
@@ -80,7 +81,7 @@ def home(request):
 
     return render(request, 'home.html',  { 'pelis': datos, 'se': sesion }) 
     
-
+@csrf_protect
 def perfil(request):
     sesion = getSession(request)
     if sesion == "no":
@@ -88,6 +89,7 @@ def perfil(request):
     else:
         return render(request, 'login/perfil.html', {'data': buscar_usuario(sesion), 'len':len(buscar_usuario(sesion)['pelis']) } )
 
+@csrf_protect
 def lista_peliculas(request):
 
     pelis = Peliculas
@@ -103,7 +105,7 @@ def lista_peliculas(request):
 
 
 
-
+@csrf_protect
 def signin(request):
     sesion = getSession(request)
     if request.method == 'GET':
@@ -117,7 +119,8 @@ def signin(request):
                 return render(request, 'signin.html', {"error": "Username or password is incorrect.", 'se': sesion})
         else:
             return render(request, 'signin.html', {"error": "Username not exists.", 'se': sesion})
-    
+
+@csrf_protect
 def raking_user(request):
 
     if request.method == "GET":
