@@ -11,16 +11,22 @@ from django.core.mail import send_mail, BadHeaderError
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
-
+from django.views.decorators.csrf import csrf_exempt
+from urllib import request
+import json
 from .recomendaciones_1 import recomendacion
 
 # Create your views here.
 
 
 
-Peliculas = peliculas()
-Genres = genres()
+Genres_url = request.urlopen("https://imgmovies.blob.core.windows.net/data/genres.json")
+Genres = json.load(Genres_url)
 
+Peliculas_url = request.urlopen("https://imgmovies.blob.core.windows.net/data/peliculas.json")
+Peliculas = json.load(Peliculas_url)
+
+@csrf_exempt
 def signup(request):
     sesion = getSession(request)
     if request.method == 'GET':
@@ -36,7 +42,7 @@ def signup(request):
         else:
             return render(request, 'signup.html', {"error": "Passwords did not match.", 'se': sesion})
 
-
+@csrf_exempt
 def buscar(request):
     sesion = getSession(request)
     if request.method == 'POST':
@@ -70,7 +76,7 @@ def logout(request):
     deleteSession(request)
     return redirect('home')
 
-
+@csrf_exempt
 def home(request):
 
     sesion = getSession(request)
@@ -80,7 +86,7 @@ def home(request):
 
     return render(request, 'home.html',  { 'pelis': datos, 'se': sesion }) 
     
-
+@csrf_exempt
 def perfil(request):
     sesion = getSession(request)
     if sesion == "no":
@@ -88,6 +94,7 @@ def perfil(request):
     else:
        return render(request, 'login/perfil.html', {'data': buscar_usuario(sesion)} )
 
+@csrf_exempt
 def lista_peliculas(request):
 
     pelis = Peliculas
@@ -103,7 +110,7 @@ def lista_peliculas(request):
 
 
 
-
+@csrf_exempt
 def signin(request):
     sesion = getSession(request)
     if request.method == 'GET':
@@ -117,7 +124,8 @@ def signin(request):
                 return render(request, 'signin.html', {"error": "Username or password is incorrect.", 'se': sesion})
         else:
             return render(request, 'signin.html', {"error": "Username not exists.", 'se': sesion})
-    
+
+@csrf_exempt
 def raking_user(request):
 
     if request.method == "GET":
@@ -126,7 +134,7 @@ def raking_user(request):
         rating = request.GET['rating']
         peliculas_user(sesion,title,int(rating))
 
-
+@csrf_exempt
 def algoritmo_ia(request):
     sesion = getSession(request)
     if sesion != "no":

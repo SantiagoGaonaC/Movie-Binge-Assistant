@@ -1,4 +1,4 @@
-from operator import truediv
+
 from pymongo import MongoClient
 from cryptography.fernet import Fernet
 
