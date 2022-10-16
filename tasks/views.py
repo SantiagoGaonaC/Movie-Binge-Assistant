@@ -5,7 +5,7 @@ from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login
 
 from .session import createSession, getSession, deleteSession
 from django.core.paginator import Paginator
-import json
+
 from django.http import Http404
 from django.core.mail import send_mail, BadHeaderError
 from django.urls import reverse_lazy
