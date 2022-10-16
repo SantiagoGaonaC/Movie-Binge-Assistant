@@ -11,7 +11,8 @@ from django.core.mail import send_mail, BadHeaderError
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
+
 from .recomendaciones_1 import recomendacion
 
 # Create your views here.
@@ -21,7 +22,7 @@ from .recomendaciones_1 import recomendacion
 Peliculas = peliculas()
 Genres = genres()
 
-@csrf_protect
+@csrf_exempt
 def signup(request):
     sesion = getSession(request)
     if request.method == 'GET':
@@ -37,7 +38,7 @@ def signup(request):
         else:
             return render(request, 'signup.html', {"error": "Passwords did not match.", 'se': sesion})
 
-@csrf_protect
+@csrf_exempt
 def buscar(request):
     sesion = getSession(request)
     if request.method == 'POST':
@@ -71,7 +72,7 @@ def logout(request):
     deleteSession(request)
     return redirect('home')
 
-@csrf_protect
+@csrf_exempt
 def home(request):
 
     sesion = getSession(request)
@@ -81,7 +82,7 @@ def home(request):
 
     return render(request, 'home.html',  { 'pelis': datos, 'se': sesion }) 
     
-@csrf_protect
+@csrf_exempt
 def perfil(request):
     sesion = getSession(request)
     if sesion == "no":
@@ -89,7 +90,7 @@ def perfil(request):
     else:
         return render(request, 'login/perfil.html', {'data': buscar_usuario(sesion), 'len':len(buscar_usuario(sesion)['pelis']) } )
 
-@csrf_protect
+@csrf_exempt
 def lista_peliculas(request):
 
     pelis = Peliculas
@@ -105,7 +106,7 @@ def lista_peliculas(request):
 
 
 
-@csrf_protect
+@csrf_exempt
 def signin(request):
     sesion = getSession(request)
     if request.method == 'GET':
@@ -120,7 +121,7 @@ def signin(request):
         else:
             return render(request, 'signin.html', {"error": "Username not exists.", 'se': sesion})
 
-@csrf_protect
+@csrf_exempt
 def raking_user(request):
 
     if request.method == "GET":
@@ -129,7 +130,7 @@ def raking_user(request):
         rating = request.GET['rating']
         peliculas_user(sesion,title,int(rating))
 
-
+@csrf_exempt
 def algoritmo_ia(request):
     sesion = getSession(request)
     if sesion != "no":
