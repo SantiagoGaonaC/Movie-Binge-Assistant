@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from cryptography.fernet import Fernet
 
 def conexion():
-    cliente =  MongoClient('mongodb://moviesdb:2tgpguBaPN1wLbjF6MC58atNXAnToWUY1F5895yt0jCUF1lPgxktObXKi9iTacTHyIrCQ2Jr8oBUAUIWCpAaqA==@moviesdb.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@moviesdb@')
+    cliente =  MongoClient('mongodb+srv://omarn:Movies-Binge@movies.maq9nom.mongodb.net/?retryWrites=true&w=majority')
     return cliente
 
 def verficiar_user_repetido(email):
@@ -21,14 +21,14 @@ def insert_user(nombre, email, passwd ):
         key = Fernet.generate_key()
         f = Fernet(key)
         token = f.encrypt(str.encode(passwd))
-        users_col.insert_one( { "nombre": nombre, "passwd": token, "key": key, "email": email } )
-        cliente.close()
+        users_col.insert_one( { "nombre": nombre, "passwd": token, "key": key, "email": email, "pelis": [] } )
+        
 
 def buscar_usuario(email):
     cliente = conexion()
     users_col = cliente["moviesimdb"]["users"]
     usuario = users_col.find_one({"email": email})
-    cliente.close()
+    
     return usuario
 
 def login(email,passwd):
@@ -45,6 +45,52 @@ def login(email,passwd):
         print("usuario no registrado")
     
 
+def peliculas():
+    cliente = conexion()
+    pelis = cliente["moviesimdb"]["movies"]
+    pel = pelis.find()
 
-    
+    a = list(pel)
+
+    return a
+
+def buscar_pelicula(text):
+    cliente = conexion()
+    pelis = cliente["moviesimdb"]["movies"]
+    pel = pelis.find({ 'title' : {"$regex": '.*'+text+'.*', "$options" :'i'} })
+    pelicuas_busquedad = list(pel)
+    return pelicuas_busquedad
+
+def peliculas_user(email,title,ranking):
+    user = buscar_usuario(email)
+    array = user['pelis']
+    j = {'title': title, 'rating': ranking}
+    booleano = True
+    for i in range(0,len(array)):
+        if array[i]['title'] == title:
+            booleano = False
+            array[i]['rating'] = ranking
+            break
+    if booleano:
+        array.append(j)
+
+    cliente = conexion()
+    users_col = cliente["moviesimdb"]["users"]
+    users_col.update_one({'email': email}, { '$set': {'pelis': array}})
+
+def genres():
+    cliente = conexion()
+    pelis = cliente["moviesimdb"]["movies_genres_matrix"]
+    pel = pelis.find()
+    a = list(pel)
+    return a
+
+def buscar_peli_id(text):
+    cliente = conexion()
+    pelis = cliente["moviesimdb"]["movies"]
+    pel = pelis.find_one({ 'imdb_id' : text })
+
+    return pel
+
+
 

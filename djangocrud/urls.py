@@ -18,25 +18,22 @@ from django.contrib import admin
 from django.urls import path
 from tasks import views
 from django.contrib.auth import views as auth_views
+from tasks.views import ResetPasswordView
+
 
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
     path('signup/', views.signup, name='signup'),
-    path('tasks/', views.tasks, name='tasks'),
-    path('tasks_completed/', views.tasks_completed, name='tasks_completed'),
     path('signin/', views.signin, name='signin'),
-    path('create_task/', views.create_task, name='create_task'),
-    path('tasks/<int:task_id>', views.task_detail, name='task_detail'),
-    path('taks/<int:task_id>/complete', views.complete_task, name='complete_task'),
-    path('tasks/<int:task_id>/delete', views.delete_task, name='delete_task'),
     path('pelis/', views.lista_peliculas, name='lista_pelis'),
-    path('pelis/<int:task_id>', views.detalle_peli, name='detalle_pelis'),
-    path('password_reset/', views.password_reset_request, name='password_reset'),
-    path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(),name='password_reset_done'),
-    path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(),name='password_reset_confirm'),
-    path('reset/done/',auth_views.PasswordResetCompleteView.as_view(),name='password_reset_complete'),
-    path('pelicula/<id>', views.detalle_peli, name='detalle_pelis'),
     path('logout/', views.logout, name='logout'),
-    path('perfil/', views.perfil, name='logout'),
+    path('perfil/', views.perfil, name='perfil'),
+    path('search/', views.buscar, name='search'),
+    path('recomendacion/', views.algoritmo_ia, name='recomendacion'),
+    path('usuario/ranking/', views.raking_user, name='ranking_user'),
+    path('password-reset/', ResetPasswordView.as_view(), name='password_reset'),
+    path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'),name='password_reset_confirm'),
+    path('password-reset-complete/',auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),name='password_reset_complete'),
+    
 ]

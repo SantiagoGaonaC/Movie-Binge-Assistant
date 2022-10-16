@@ -1,0 +1,75 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include 'head.html' %}
+
+
+  <link rel="stylesheet" href="{% static '/css/app.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <title>Recomendacion</title>
+</head>
+
+<body>
+
+
+  {% include '_navbar.html' %}
+
+
+  <br>
+
+
+  <div class="container">
+
+    <br>
+    <div class="container d-flex align-items-center justify-content-center">
+      <div class="Posters "
+        style="display: -ms-flexbox;display: flex;-ms-flex-flow: row wrap;flex-flow: row wrap;margin: 0 0rem;background-color: #080f28;">
+        {% for m in pelis %}
+        <div class="">
+          {% include 'template_pelis.html' %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script>
+
+    function estrellas(id) {
+      const star = ".star-" + id
+      const ra = ".rating-" + id
+      const allStars = document.querySelectorAll(star);
+      let current_rating = document.querySelector(ra);
+      allStars.forEach((star, i) => {
+        star.onclick = function () {
+          let current_star_level = i + 1;
+          current_rating.innerHTML = `${current_star_level} of 5`;
+          //current_star_level = NUMBER
+          console.log("Tipo de dato: " + typeof current_star_level);
+          allStars.forEach((star, j) => {
+            if (current_star_level >= j + 1) {
+              star.innerHTML = "&#9733";
+            } else {
+              star.innerHTML = "&#9734";
+            }
+          });
+        };
+      });
+    };
+  
+  </script>
+
+
+</body>
+
+</html>
+{% include 'footer.html' %}
+{% endblock %}
