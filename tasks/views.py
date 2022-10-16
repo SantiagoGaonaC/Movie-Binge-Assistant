@@ -92,7 +92,7 @@ def lista_peliculas(request):
 
     pelis = Peliculas
     page = request.GET.get('page',1)
-
+    sesion = getSession(request)
     try:
         paginator = Paginator(Peliculas, 12)
         pelis = paginator.page(page)
