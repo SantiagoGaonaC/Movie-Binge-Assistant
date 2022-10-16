@@ -12,15 +12,19 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.decorators.csrf import csrf_exempt
-
+from urllib import request
+import json
 from .recomendaciones_1 import recomendacion
 
 # Create your views here.
 
 
 
-Peliculas = peliculas()
-Genres = genres()
+Genres_url = request.urlopen("https://imgmovies.blob.core.windows.net/data/genres.json")
+Genres = json.load(Genres_url)
+
+Peliculas_url = request.urlopen("https://imgmovies.blob.core.windows.net/data/peliculas.json")
+Peliculas = json.load(Peliculas_url)
 
 @csrf_exempt
 def signup(request):

@@ -52,7 +52,7 @@ def recomendacion(peliculas, user, peliGenres):
 
 
     userSubset = userSubset.reset_index(drop=True)
-    tabla_generos = userSubset.drop("imdb_id",1).drop("title",1).drop("_id",1)
+    tabla_generos = userSubset.drop("imdb_id",1).drop("title",1)
     #tabla_generos = userSubset.drop("imdb_id",1).drop("title",1).drop("genres",1).drop("year",1).drop("_id",1).drop("id",1).drop("original_language",1).drop("original_title",1).drop("overview",1).drop("popularity",1).drop("production_companies",1).drop("budget",1).drop("production_countries",1).drop("release_date",1).drop("revenue",1).drop("runtime",1).drop("spoken_languages",1).drop("status",1).drop("tagline",1).drop("vote_average",1).drop("vote_count",1).drop("production_companies_number",1).drop("production_countries_number",1).drop("spoken_languages_number",1)
 
     
@@ -60,7 +60,7 @@ def recomendacion(peliculas, user, peliGenres):
     perfil_usu = tabla_generos.transpose().dot(inputMovies['rating'])
     generos = movies_df_copy.set_index(movies_df_copy['imdb_id'])
 
-    generos = generos.drop("imdb_id",1).drop("title",1).drop("_id",1)
+    generos = generos.drop("imdb_id",1).drop("title",1)
     generos.shape
 
     recom = ((generos*perfil_usu).sum(axis=1))/(perfil_usu.sum())
