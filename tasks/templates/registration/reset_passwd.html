@@ -5,27 +5,27 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5">
-                    {% if validlink %}
+
                         <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
                             <div class="card-header justify-content-center">
                               <h3 class="font-weight-light my-4 text-center">Reset Your Password</h3>
                             </div>
-                            {% if form.errors %}
-                                <div class="alert alert-danger alert-dismissible" role="alert">
-                                    <div id="form_errors">
-                                        {% for key, value in form.errors.items %}
-                                            <strong>{{ value }}</strong>
-                                        {% endfor %}
-                                    </div>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                            
+                            {% if er %}
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <div id="form_errors">
+                        
+                                        <strong>{{error}}</strong>
+                                   
                                 </div>
-                            {% endif %}
-
+                  
+                            </div>
+                            {% endif %}                        
+                            
                             <div class="card-body">
-                                <form method="POST">
+                                <form method="POST" action="{% url 'reset_complete' %}">
                                     {% csrf_token %}
+                                    <input type="text" name="email" value="{{email}}" hidden>
                                     <div class="form-row">
                                         <div class="col-md-10 offset-md-1">
                                             <div class="form-group">
@@ -58,12 +58,7 @@
                                 </form>
                             </div>
                         </div>
-                    {% else %}
-                    <div class="alert alert-warning">
-                        The password reset link was invalid, possibly because it has already been used.
-                        Please request a new password reset.
-                    </div>
-                    {% endif %}
+
                 </div>
             </div>
         </div>

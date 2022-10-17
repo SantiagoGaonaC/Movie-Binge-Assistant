@@ -29,7 +29,79 @@
         style="display: -ms-flexbox;display: flex;-ms-flex-flow: row wrap;flex-flow: row wrap;margin: 0 0rem;background-color: #080f28;">
         {% for m in pelis %}
         <div class="">
-          {% include 'template_pelis.html' %}
+
+          {% load static %}
+<a class="Posters-link shadow p-3 mb-5 rounded" data-bs-toggle="modal" data-bs-target="#{{m.imdb_id}}"
+    onclick="estrellas('{{m.imdb_id}}')">
+    <img src="https://imgmovies.blob.core.windows.net/movies-img/{{m.imdb_id}}.jpg" class="card-img-top btn-img"
+        alt="{{ m.original_title}}" width="154" height="331">
+    <br>
+    <div class="listing-content">
+        <p class="content-p ">
+            {{m.original_title}}({{m.release_date.6}}{{m.release_date.7}}{{m.release_date.8}}{{m.release_date.9}})</p>
+        <p class="content-p">genders: {{m.genres}}</p>
+        <p class="content-p " style="color: #30cf30;"><i class="bi bi-star-fill"
+                style="color: #ffdf00;border-color: black;border: 10px;"></i>{{m.vote_average}}/10</p>
+    </div>
+</a>
+
+<div class="modal fade" id="{{m.imdb_id}}" aria-hidden="true" aria-labelledby="exampleModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col">
+                    </div>
+                </div>
+                <!-- <button type="button" class="btn-close btn-close-color" data-bs-dismiss="modal"
+                    aria-label="Close"></button> -->
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <img class="img-settings rounded mx-auto d-block"
+                                src="https://imgmovies.blob.core.windows.net/movies-img/{{m.imdb_id}}.jpg">
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="title-modal" id="exampleModalToggleLabel">{{m.title}}</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="title-date" id="exampleModalToggleLabel">({{m.release_date}})</h5>
+                                </div>
+                                <div class="col">
+                                    <h5 class="title-genres" id="exampleModalToggleLabel">{{m.genres}}</h5>
+                                </div>
+                            </div>
+                            <div class="row tagline">
+                                <p>{{m.tagline}}</p>
+                            </div>
+                            <div class="row mb-4 overview">
+                                {{m.overview}}
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col ">{{m.spoken_languages}}</div>
+                                <div class="col ">IMDb: {{m.vote_average}}/10</div>
+                                <div class="col ">{{m.runtime}} minutes</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="exit-{{m.imdb_id}}" class="btn btn-modal-footer" data-bs-target="#exampleModalToggle2"
+                    data-bs-toggle="modal" data-bs-dismiss="modal">Exit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
         </div>
         {% endfor %}
       </div>

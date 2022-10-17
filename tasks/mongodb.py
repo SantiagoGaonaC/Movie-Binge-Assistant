@@ -31,6 +31,14 @@ def buscar_usuario(email):
     
     return usuario
 
+
+def existe_usuario(email):
+    usuario = buscar_usuario(email)
+    if(str(type(usuario)) == "<class 'dict'>"):
+        return True
+    else:
+        return False
+
 def login(email,passwd):
     usuario = buscar_usuario(email)
     if(str(type(usuario)) == "<class 'dict'>"):
@@ -91,6 +99,21 @@ def buscar_peli_id(text):
     pel = pelis.find_one({ 'imdb_id' : text })
 
     return pel
+
+def cambio_passwd(email, passwd):
+    cliente = conexion()
+    users_col = cliente["moviesimdb"]["users"]
+    key = Fernet.generate_key()
+    f = Fernet(key)
+    token = f.encrypt(str.encode(passwd))
+    users_col.update_one({'email': email},{ '$set': {"passwd": token, "key": key}})
+
+def update_perfil(name,email,pelis):
+    cliente = conexion()
+    users_col = cliente["moviesimdb"]["users"]
+    users_col.update_one({'email': email},{ '$set': {"nombre": name, "email": email, "pelis": pelis}})
+    
+    
 
 
 
