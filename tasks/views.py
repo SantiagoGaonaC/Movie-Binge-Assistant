@@ -131,6 +131,7 @@ def buscar(request):
             p = Peliculas
         else:
             p = buscar_pelicula(request.POST['search'])
+
         request.session['search'] = request.POST['search']
         page = request.GET.get('page',1)
         try:
@@ -140,7 +141,7 @@ def buscar(request):
             raise Http404
 
         return render(request, 'busquedad.html', { 'pelis': pelis, 'se': sesion })
-    else:
+    elif request.method == 'GET':
 
         p = buscar_pelicula(request.session['search'])
         page = request.GET.get('page',1)
