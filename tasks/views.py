@@ -1,7 +1,10 @@
 
 
+from email.message import EmailMessage
 from django.shortcuts import render, redirect, get_object_or_404
-from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login, peliculas, buscar_pelicula, peliculas_user, genres, buscar_peli_id
+
+from djangocrud import settings
+from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login, peliculas, buscar_pelicula, peliculas_user, genres, buscar_peli_id, existe_usuario, cambio_passwd
 
 from .session import createSession, getSession, deleteSession
 from django.core.paginator import Paginator
@@ -15,6 +18,10 @@ from django.views.decorators.csrf import csrf_exempt
 from urllib import request
 import json
 from .recomendaciones_1 import recomendacion
+from django.template.loader import render_to_string
+from cryptography.fernet import Fernet
+
+from tasks import session
 
 # Create your views here.
 
@@ -25,6 +32,65 @@ Genres = json.load(Genres_url)
 
 Peliculas_url = request.urlopen("https://imgmovies.blob.core.windows.net/data/peliculas.json")
 Peliculas = json.load(Peliculas_url)
+
+
+@csrf_exempt
+def complete_reset(request):
+    sesion = getSession(request)
+    email = request.POST['email']
+    passwd1 = request.POST['new_password1']
+    passwd2 = request.POST['new_password2']
+
+    if passwd1 == passwd2:
+        cambio_passwd(email,passwd1)
+        return render(request, 'registration/reset_complete.html', {'se': sesion}) 
+    else:
+        return render(request, 'registration/reset_passwd.html', {'se': sesion, 'email': email, 'error': 'Passwords do not match', 'er': True}) 
+
+@csrf_exempt
+def reset_passwd(request, email):
+    sesion = getSession(request)
+    k = str(request.GET.get('k'))
+    f = Fernet(k.encode())
+    token = str(email).encode()
+    e = f.decrypt(token).decode()
+    return render(request, 'registration/reset_passwd.html', {'se': sesion, 'email': e, 'er': False}) 
+   
+
+
+@csrf_exempt
+def mail(request):
+    sesion = getSession(request)
+    if request.method == 'GET':
+        return render(request, 'registration/send_mail.html', {'se': sesion, 'error': True})
+    elif request.method == 'POST':
+        
+        email = request.POST['email']
+        user = existe_usuario(email)
+        if user:
+
+            key = Fernet.generate_key()
+            f = Fernet(key)
+            token = f.encrypt(str.encode(email))
+            template = render_to_string('registration/email_template.html',{
+                'email': email,
+                'host': settings.ALLOWED_HOSTS[0],
+                'email_byte':token.decode('utf-8'),
+                'key': key.decode()
+            })
+
+            send_mail(
+                "Reset Password",
+                template,
+                settings.EMAIL_HOST_USER,
+                [email]
+            )
+            return render(request, 'registration/reset_intermedio.html', {'se': sesion})
+        else:
+            print(user)
+            return render(request, 'registration/send_mail.html', {'se': sesion, 'error': user})
+
+
 
 @csrf_exempt
 def signup(request):
@@ -155,16 +221,3 @@ def algoritmo_ia(request):
     else:
         return redirect('signin')
     
-
-
-
-
-class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
-    template_name = 'registration/password_reset.html'
-    email_template_name = 'registration/password_reset_email.html'
-    subject_template_name = 'registration/password_reset_subject'
-    success_message = "We've emailed you instructions for setting your password, " \
-                      "if an account exists with the email you entered. You should receive them shortly." \
-                      " If you don't receive an email, " \
-                      "please make sure you've entered the address you registered with, and check your spam folder."
-    success_url = reverse_lazy('home')
