@@ -35,6 +35,7 @@ urlpatterns = [
     path('search/', views.buscar, name='search'),
     path('recomendacion/', views.algoritmo_ia, name='recomendacion'),
     path('usuario/ranking/', views.raking_user, name='ranking_user'),
+    path('usuario/perfil/edit', views.edit_perfil, name='edit_perfil'),
 
     
 ]

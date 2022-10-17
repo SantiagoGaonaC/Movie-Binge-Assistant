@@ -1,7 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     {% include 'head.html' %}
+    <link rel="stylesheet" href="{% static '/css/app.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <title>Perfil</title>
 </head>
 <body>
@@ -13,33 +16,54 @@
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">{{data.nombre}}<span class="font-weight-bold"></span><span  class="text-black-50">{{data.email}}</span><span> </span></div>
             </div>
-            <div class="col-md-5 border-right">
+            <div class="col-md-6 border-right">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="text-right">Profile Settings</h4>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-md-10"><label class="labels">Name</label><input disabled="disabled" type="text" class="form-control" placeholder="first name" value="{{data.nombre}}"></div>
+                        <div class="col-md-12   "><label class="labels">Name</label><input disabled="disabled" type="text" class="form-control" placeholder="first name" id="name" value="{{data.nombre}}"></div>
                     </div>
                     <div class="row mt-3">
 
-                        <div class="col-md-12"><label class="labels">Email</label><input disabled="disabled" type="text" class="form-control" placeholder="enter email id" value="{{data.email}}"></div>
+                        <div class="col-md-12"><label class="labels">Email</label><input id="email" disabled="disabled" type="text" class="form-control" placeholder="enter email id" value="{{data.email}}"></div>
 
                         <br> <br><div class="col-md-12"><br><label class="labels">Selected Movies: </label></div>
                         <br> <br>
+
+                        <div id="style-2" >
+
+        
                         {% if len == 0 %}
                             <h5>No ha seleccionado peliculas</h5>
                         {% else %}
-                            <ul>
+                           <table>
+                            <tr>
+                                <th >Movies</th>
+                                <th >&nbsp; Rating</th>
+                                
+                            </tr>
                             {% for m in data.pelis %}
-                                <li>{{m.title}}</li>
+                            <tr id="{{m.title}}">
+                                <td class="titulo" >{{m.title}}</td> 
+                                <td >&nbsp;&nbsp;<i onclick="menos('ra-{{m.title}}')" hidden class="bi bi-dash-circle bi-rating"></i><input type="number" value="{{m.rating}}" id="ra-{{m.title}}" class="calificacion" min="1" max="5" disabled><i hidden onclick="mas('ra-{{m.title}}')" class="bi bi-plus-circle bi-rating"></i></td>
+                                <td class="eliminar" hidden>&nbsp;&nbsp;<i onclick="eliminar('{{m.title}}')" class="bi bi-trash bi-rating"></i></td>
+                            </tr>
+
+        
+                              
+                          
                             {% endfor %}
-                            </ul>
+                            </table>
                         {% endif %}
+                        </div>
 
                         
                     </div>
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                    <div class="mt-5 text-center">
+                        <button onclick="edit()" class="btn btn-primary profile-button" type="button">Edit Profile</button>
+                        <button onclick="save()" id="save" class="btn btn-primary profile-button" type="button" hidden>Save Profile</button>
+                    </div>
                 </div>
             </div>
             
@@ -47,6 +71,95 @@
     </div>
     </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script>
+
+    function eliminar(id){
+        document.getElementById(id).remove();
+    }
+
+    function save(){
+
+        Name = document.getElementById('name');
+        Email = document.getElementById('email');
+        Save = document.getElementById('save');
+
+    
+        const allBtn = document.querySelectorAll('.bi');
+        allBtn.forEach(e => e.setAttribute('hidden',""))
+
+        const allBorrar = document.querySelectorAll('.eliminar');
+        allBorrar.forEach(e => e.setAttribute('hidden',""))
+
+        Name.setAttribute("disabled","");
+        Email.setAttribute("disabled","");
+        Save.setAttribute("hidden","");
+
+        const allTitle = document.querySelectorAll('.titulo');
+    
+        const allRating = document.querySelectorAll('.calificacion');
+
+        let p = []
+
+
+        for(let i = 0;i< allTitle.length;i++){
+            p.push({'title': allTitle[i].textContent, 'rating': parseInt(allRating[i].value)})
+        }
+        
+        $.ajax({
+        url: "{% url 'edit_perfil' %}",
+        method: 'GET',
+        data : {
+            'name': Name.value,
+            'email': Email.value,
+            'pelis': JSON.stringify(p)
+          }
+        });
+        
+        
+        
+    }
+
+    function menos(id){
+        r = document.getElementById(id);
+        if(r.value > 1){
+            r.value = parseInt(r.value)-1;
+        }
+        
+        
+
+    }
+
+    function mas(id){
+        r = document.getElementById(id);
+        if(r.value < 5){
+            r.value = parseInt(r.value)+1;
+        }
+        
+        
+
+    }
+
+    function edit(){
+        Name = document.getElementById('name');
+        Email = document.getElementById('email');
+        Save = document.getElementById('save');
+
+        const allBtn = document.querySelectorAll('.bi');
+        allBtn.forEach(e => e.removeAttribute('hidden'))
+
+        const allBorrar = document.querySelectorAll('.eliminar');
+        allBorrar.forEach(e => e.removeAttribute('hidden'))
+
+        Name.removeAttribute("disabled");
+        Email.removeAttribute("disabled");
+        Save.removeAttribute("hidden");
+
+    }
+
+  
+  </script>
     
 </body>
 </html>

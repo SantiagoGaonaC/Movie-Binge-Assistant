@@ -4,7 +4,7 @@ from email.message import EmailMessage
 from django.shortcuts import render, redirect, get_object_or_404
 
 from djangocrud import settings
-from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login, peliculas, buscar_pelicula, peliculas_user, genres, buscar_peli_id, existe_usuario, cambio_passwd
+from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login, peliculas, buscar_pelicula, peliculas_user, genres, buscar_peli_id, existe_usuario, cambio_passwd, update_perfil
 
 from .session import createSession, getSession, deleteSession
 from django.core.paginator import Paginator
@@ -190,6 +190,19 @@ def signin(request):
                 return render(request, 'signin.html', {"error": "Username or password is incorrect.", 'se': sesion})
         else:
             return render(request, 'signin.html', {"error": "Username not exists.", 'se': sesion})
+
+
+@csrf_exempt
+def edit_perfil(request):
+    sesion = getSession(request)
+    if sesion != "no":
+        if request.method == "GET":
+            name = request.GET['name']
+            email = request.GET['email']
+            pelis = json.loads(request.GET['pelis'])
+            update_perfil(name,email,pelis)
+            return redirect('perfil')
+
 
 @csrf_exempt
 def raking_user(request):

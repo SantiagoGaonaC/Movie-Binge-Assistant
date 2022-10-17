@@ -145,3 +145,4 @@ EMAIL_HOST_USER = 'moviebingeassistant@gmail.com'
 EMAIL_HOST_PASSWORD = 'pmreqlvlxypwbufh'
 SESSION_EXPIRE_AT_BROWSER_CLOSE  = True
 
+

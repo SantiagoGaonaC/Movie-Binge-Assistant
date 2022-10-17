@@ -107,6 +107,11 @@ def cambio_passwd(email, passwd):
     f = Fernet(key)
     token = f.encrypt(str.encode(passwd))
     users_col.update_one({'email': email},{ '$set': {"passwd": token, "key": key}})
+
+def update_perfil(name,email,pelis):
+    cliente = conexion()
+    users_col = cliente["moviesimdb"]["users"]
+    users_col.update_one({'email': email},{ '$set': {"nombre": name, "email": email, "pelis": pelis}})
     
     
 
