@@ -29,6 +29,7 @@ urlpatterns = [
     path('pelis/', views.lista_peliculas, name='lista_pelis'),
     path('logout/', views.logout, name='logout'),
     path('forgot_password/', views.mail, name='enviarmail'),
+    path('change_password/', views.change_password, name='change_password'),
     path('reset_complete/', views.complete_reset, name='reset_complete'),
     path('reset/<str:email>/', views.reset_passwd, name='reset'),
     path('perfil/', views.perfil, name='perfil'),

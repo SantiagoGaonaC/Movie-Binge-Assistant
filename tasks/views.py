@@ -1,19 +1,13 @@
-
-
-from email.message import EmailMessage
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 
 from djangocrud import settings
-from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login, peliculas, buscar_pelicula, peliculas_user, genres, buscar_peli_id, existe_usuario, cambio_passwd, update_perfil
+from .mongodb import insert_user, verficiar_user_repetido, buscar_usuario, login, buscar_pelicula, peliculas_user, buscar_peli_id, existe_usuario, cambio_passwd, update_perfil
 
 from .session import createSession, getSession, deleteSession
 from django.core.paginator import Paginator
 
 from django.http import Http404
-from django.core.mail import send_mail, BadHeaderError
-from django.urls import reverse_lazy
-from django.contrib.auth.views import PasswordResetView
-from django.contrib.messages.views import SuccessMessageMixin
+from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 from urllib import request
 import json
@@ -21,7 +15,6 @@ from .recomendaciones_1 import recomendacion
 from django.template.loader import render_to_string
 from cryptography.fernet import Fernet
 
-from tasks import session
 
 # Create your views here.
 
@@ -32,6 +25,25 @@ Genres = json.load(Genres_url)
 
 Peliculas_url = request.urlopen("https://imgmovies.blob.core.windows.net/data/peliculas.json")
 Peliculas = json.load(Peliculas_url)
+
+
+@csrf_exempt
+def change_password(request):
+    sesion = getSession(request)
+    if sesion != "no":
+        if request.method == 'GET':
+            return render(request, 'login/change_passwd.html', {'se': sesion, 'email': sesion, 'er': False}) 
+        elif request.method == 'POST':
+            email = request.POST['email']
+            passwd1 = request.POST['new_password1']
+            passwd2 = request.POST['new_password2']
+            if passwd1 == passwd2:
+                cambio_passwd(email,passwd1)
+                return render(request, 'login/change_passwd_complete.html', {'se': sesion}) 
+            else:
+                return render(request, 'login/change_passwd.html', {'se': sesion, 'email': sesion, 'error': 'Passwords do not match', 'er':True})
+    else:
+        return redirect('signin')
 
 
 @csrf_exempt
@@ -61,6 +73,10 @@ def reset_passwd(request, email):
 @csrf_exempt
 def mail(request):
     sesion = getSession(request)
+
+    if sesion != "no":
+        return redirect('change_password')
+
     if request.method == 'GET':
         return render(request, 'registration/send_mail.html', {'se': sesion, 'error': True})
     elif request.method == 'POST':
@@ -87,7 +103,6 @@ def mail(request):
             )
             return render(request, 'registration/reset_intermedio.html', {'se': sesion})
         else:
-            print(user)
             return render(request, 'registration/send_mail.html', {'se': sesion, 'error': user})
 
 
@@ -158,7 +173,8 @@ def perfil(request):
     if sesion == "no":
         return redirect('signin')
     else:
-       return render(request, 'login/perfil.html', {'data': buscar_usuario(sesion)} )
+        user = buscar_usuario(sesion)
+        return render(request, 'login/perfil.html', {'data': user, 'len':len(user['pelis']) } )
 
 @csrf_exempt
 def lista_peliculas(request):
@@ -201,7 +217,8 @@ def edit_perfil(request):
             email = request.GET['email']
             pelis = json.loads(request.GET['pelis'])
             update_perfil(name,email,pelis)
-            return redirect('perfil')
+            user = buscar_usuario(sesion)
+            return render(request, 'login/perfil.html', {'data': user, 'len':len(user['pelis']) } )
 
 
 @csrf_exempt
@@ -218,18 +235,34 @@ def algoritmo_ia(request):
     sesion = getSession(request)
     if sesion != "no":
         userInput = buscar_usuario(sesion)['pelis']
+        pel = []
         if len(userInput) == 0:
             nuevas_pelis = sorted(Peliculas, key=lambda t: t['vote_average'])
-            pel = []
-            for p in range(0,12):
+            for p in range(0,24):
                 pel.append(nuevas_pelis[p])
+
+            page = request.GET.get('page',1)
+            try:
+                paginator = Paginator(pel, 12)
+                pel = paginator.page(page)
+            except:
+                raise Http404
+
             return render(request, 'recomendaciones.html', { 'pelis': pel})
         else:
-            pel = []
             pelis = recomendacion(Peliculas,userInput, Genres)
             for i in pelis:
-                pel.append(buscar_peli_id(i))
-        
+                for p in Peliculas:
+                    if p['imdb_id'] == i:
+                        pel.append(p)
+
+            page = request.GET.get('page',1)
+            try:
+                paginator = Paginator(pel, 12)
+                pel = paginator.page(page)
+            except:
+                raise Http404
+
             return render(request, 'recomendaciones.html', { 'pelis': pel})
     else:
         return redirect('signin')

@@ -108,7 +108,9 @@ function estrellas(id) {
       star.onclick = function () {
         let current_star_level = i + 1;
         current_rating.innerHTML = `${current_star_level} of 5`;
-        document.getElementById('ra-'+id).value = current_star_level
+        if(document.getElementById('ra-'+id)){
+          document.getElementById('ra-'+id).value = current_star_level
+        }
 
         allStars.forEach((star, j) => {
           if (current_star_level >= j + 1) {

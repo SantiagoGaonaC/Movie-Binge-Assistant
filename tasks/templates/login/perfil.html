@@ -14,7 +14,8 @@
     <div class="container rounded bg-white mt-5 mb-5">
         <div class="row">
             <div class="col-md-3 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">{{data.nombre}}<span class="font-weight-bold"></span><span  class="text-black-50">{{data.email}}</span><span> </span></div>
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span id="name_img" class="font-weight-bold">{{data.nombre}}</span><span id="email_img"  class="text-black-50">{{data.email}}</span><span> </span></div>
             </div>
             <div class="col-md-6 border-right">
                 <div class="p-3 py-5">
@@ -28,8 +29,16 @@
 
                         <div class="col-md-12"><label class="labels">Email</label><input id="email" disabled="disabled" type="text" class="form-control" placeholder="enter email id" value="{{data.email}}"></div>
 
-                        <br> <br><div class="col-md-12"><br><label class="labels">Selected Movies: </label></div>
-                        <br> <br>
+                        
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12"><a  class="fw-bold text-body" href="{% url 'change_password' %}">Change my password</a></div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12"><br><label class="labels">Selected Movies: </label></div>
+                        
 
                         <div id="style-2" >
 
@@ -49,17 +58,13 @@
                                 <td >&nbsp;&nbsp;<i onclick="menos('ra-{{m.title}}')" hidden class="bi bi-dash-circle bi-rating"></i><input type="number" value="{{m.rating}}" id="ra-{{m.title}}" class="calificacion" min="1" max="5" disabled><i hidden onclick="mas('ra-{{m.title}}')" class="bi bi-plus-circle bi-rating"></i></td>
                                 <td class="eliminar" hidden>&nbsp;&nbsp;<i onclick="eliminar('{{m.title}}')" class="bi bi-trash bi-rating"></i></td>
                             </tr>
-
-        
-                              
-                          
                             {% endfor %}
                             </table>
                         {% endif %}
                         </div>
-
-                        
                     </div>
+
+
                     <div class="mt-5 text-center">
                         <button onclick="edit()" class="btn btn-primary profile-button" type="button">Edit Profile</button>
                         <button onclick="save()" id="save" class="btn btn-primary profile-button" type="button" hidden>Save Profile</button>
@@ -84,6 +89,9 @@
         Name = document.getElementById('name');
         Email = document.getElementById('email');
         Save = document.getElementById('save');
+
+        document.getElementById('name_img').textContent = Name.value;
+        document.getElementById('email_img').textContent = Email.value;
 
     
         const allBtn = document.querySelectorAll('.bi');
