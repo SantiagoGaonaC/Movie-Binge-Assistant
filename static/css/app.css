@@ -1,6 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 body {
+  font-family: 'Roboto';
   background-color: #080f28;
+
+}
+
+.text-label{
+  font-size: 20px;
 }
 
 .gradient-custom-3 {
