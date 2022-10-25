@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 body {
-  background-color: #080f28;
+  background-color: #1c4b77;
 }
 
 .gradient-custom-3 {
@@ -33,12 +33,12 @@ body {
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
   margin: 0 0rem;
-  background-color: #080f28;
+  background-color: rgb(23, 57, 95)
 }
 
 .Posters-link {
   text-decoration: none;
-  background-color: #080f28;
+  background-color: #1c4b77;
   margin: 0 10px;
   display: inline-block;
   color: white;
@@ -69,7 +69,7 @@ body {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
   padding: 7px;
-  background-color: #080f28;
+  background-color: #1c4b77;
 }
 
 .content-p {
@@ -83,12 +83,12 @@ body {
 }
 
 .footer {
-  background-color: #080f28;
+  background-color: #1c4b77;
   color: white;
 }
 
 .footer button {
-  background-color: #080f28;
+  background-color: #1c4b77;
 }
 
 .navfoot-color {
@@ -184,7 +184,7 @@ body {
 }
 
 .page-link {
-  background-color: #080f28;
+  background-color: #1c4b77;
   color: white;
 }
 
@@ -217,7 +217,7 @@ body {
 }
 .btn-search-navbar:hover {
   color: #cfcfd3;
-  background-color: #080f28;
+  background-color: #1c4b77;
 }
 
 
