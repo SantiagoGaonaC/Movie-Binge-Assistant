@@ -81,7 +81,7 @@ body {
 }
 
 .modal-content {
-  background-color: #BFFBFF;
+  background-color: #54B9CA;
 }
 
 .img-settings {
@@ -234,12 +234,4 @@ body {
 
 .bi-rating:hover{
   cursor: pointer;
-}
-
-.navfoot-color {
-  background-color: #54B9CA;
-}
-
-.navbar-dark {
-  background-color: #54B9CA;
 }
