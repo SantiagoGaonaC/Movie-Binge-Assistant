@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 body {
-  background-color: #96418F;
+  background-color: #BFFBFF;
 }
 
 .Posters {
@@ -9,12 +9,12 @@ body {
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
   margin: 0 0rem;
-  background-color: #96418F;
+  background-color: #BFFBFF;
 }
 
 .Posters-link {
   text-decoration: none;
-  background-color: #80397a;
+  background-color: #54B9CA;
   margin: 0 10px;
   display: inline-block;
   color: white;
@@ -45,7 +45,7 @@ body {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
   padding: 7px;
-  background-color: #80397a;
+  background-color: #54B9CA;
 }
 
 .content-p {
@@ -59,16 +59,16 @@ body {
 }
 
 .footer {
-  background-color: #80397a;
+  background-color: #54B9CA;
   color: white;
 }
 
 .footer button {
-  background-color: #80397a;
+  background-color: #54B9CA;
 }
 
 .navfoot-color {
-  background-color: #80397a;
+  background-color: #54B9CA;
 }
 
 .modal {
@@ -81,7 +81,7 @@ body {
 }
 
 .modal-content {
-  background-color: #96418F;
+  background-color: #BFFBFF;
 }
 
 .img-settings {
@@ -151,7 +151,7 @@ body {
 }
 .btn-see-more:hover {
   transform: scale(1.1);
-  background-color: #C92675;
+  background-color: #44808A;
   color: white;
 }
 
@@ -161,7 +161,7 @@ body {
 }
 
 .page-link {
-  background-color: #80397a;
+  background-color: #44808A;
   color: white;
 }
 
@@ -194,7 +194,7 @@ body {
 }
 .btn-search-navbar:hover {
   color: #ffffff;
-  background-color: #C92675;
+  background-color: #44808A;
 }
 
 
@@ -237,9 +237,9 @@ body {
 }
 
 .navfoot-color {
-  background-color: #80397a;
+  background-color: #54B9CA;
 }
 
 .navbar-dark {
-  background-color: #80397a;
+  background-color: #54B9CA;
 }
