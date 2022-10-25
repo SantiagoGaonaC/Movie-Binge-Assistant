@@ -35,7 +35,9 @@ function user_rating(id){
         method: 'GET',
         data : {
             'title':document.getElementById('title-'+id).value,
-        'rating': document.getElementById('ra-'+id).value}
+            'rating': document.getElementById('ra-'+id).value,
+            'id': document.getElementById('id-'+id).value
+          }
     });
     document.getElementById('exit-'+id).click()
 }

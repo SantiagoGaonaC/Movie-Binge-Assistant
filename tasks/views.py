@@ -228,8 +228,9 @@ def raking_user(request):
     if request.method == "GET":
         sesion = getSession(request)
         title = request.GET['title']
+        id = request.GET['id']
         rating = request.GET['rating']
-        peliculas_user(sesion,title,int(rating))
+        peliculas_user(sesion,title,int(rating),id)
 
 @csrf_exempt
 def algoritmo_ia(request):

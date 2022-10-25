@@ -62,10 +62,10 @@ def buscar_pelicula(text):
     pelicuas_busquedad = list(pel)
     return pelicuas_busquedad
 
-def peliculas_user(email,title,ranking):
+def peliculas_user(email,title,ranking, id):
     user = buscar_usuario(email)
     array = user['pelis']
-    j = {'title': title, 'rating': ranking}
+    j = {'title': title, 'rating': ranking, 'id': id}
     booleano = True
     for i in range(0,len(array)):
         if array[i]['title'] == title:
