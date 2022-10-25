@@ -1,30 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 body {
-  background-color: #5D4E8F;
-}
-
-.gradient-custom-3 {
-  /* fallback for old browsers */
-  background: #84c5fa;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(
-    to right,
-    rgba(8, 15, 40, 255),
-    rgba(20, 27, 51, 255)
-  );
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(
-    to right,
-    rgba(8, 15, 40, 255),
-    rgba(20, 27, 51, 255)
-  );
-}
-
-.btn-success {
-  border-color: #0d6efd;
-  color: white;
+  background-color: #96418F;
 }
 
 .Posters {
@@ -33,18 +9,18 @@ body {
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
   margin: 0 0rem;
-  background-color: rgb(23, 57, 95)
+  background-color: #96418F;
 }
 
 .Posters-link {
   text-decoration: none;
-  background-color: #5D4E8F;
+  background-color: #80397a;
   margin: 0 10px;
   display: inline-block;
   color: white;
   width: 280px;
   padding: 0 0.5rem 1rem;
-  font-size: 15px;
+  font-size: 18px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -69,7 +45,7 @@ body {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
   padding: 7px;
-  background-color: #5D4E8F;
+  background-color: #80397a;
 }
 
 .content-p {
@@ -83,16 +59,16 @@ body {
 }
 
 .footer {
-  background-color: #5D4E8F;
+  background-color: #80397a;
   color: white;
 }
 
 .footer button {
-  background-color: #5D4E8F;
+  background-color: #80397a;
 }
 
 .navfoot-color {
-  background-color: #141b33;
+  background-color: #80397a;
 }
 
 .modal {
@@ -105,7 +81,7 @@ body {
 }
 
 .modal-content {
-  background-color: #191f36;
+  background-color: #96418F;
 }
 
 .img-settings {
@@ -118,7 +94,7 @@ body {
 .title-modal {
   color: white;
   font-weight: bolder;
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 @keyframes pop-swirl {
@@ -175,6 +151,7 @@ body {
 }
 .btn-see-more:hover {
   transform: scale(1.1);
+  background-color: #C92675;
   color: white;
 }
 
@@ -184,7 +161,7 @@ body {
 }
 
 .page-link {
-  background-color: #5D4E8F;
+  background-color: #80397a;
   color: white;
 }
 
@@ -212,12 +189,12 @@ body {
 }
 
 .btn-search-navbar {
-  color: #cfcfd3;
+  color: #fafafd;
   background-color: #e81b47;
 }
 .btn-search-navbar:hover {
-  color: #cfcfd3;
-  background-color: #5D4E8F;
+  color: #ffffff;
+  background-color: #C92675;
 }
 
 
@@ -255,7 +232,14 @@ body {
 
 }
 
-
 .bi-rating:hover{
   cursor: pointer;
+}
+
+.navfoot-color {
+  background-color: #80397a;
+}
+
+.navbar-dark {
+  background-color: #80397a;
 }
