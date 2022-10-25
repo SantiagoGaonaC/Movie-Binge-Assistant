@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 body {
-  background-color: #194e80;
+  background-color: #5EB1BF;
 }
 
 .gradient-custom-3 {
@@ -38,7 +38,7 @@ body {
 
 .Posters-link {
   text-decoration: none;
-  background-color: #296ba8;
+  background-color: #5EB1BF;
   margin: 0 10px;
   display: inline-block;
   color: white;
@@ -69,7 +69,7 @@ body {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
   padding: 7px;
-  background-color: #296ba8;
+  background-color: #5EB1BF;
 }
 
 .content-p {
@@ -83,12 +83,12 @@ body {
 }
 
 .footer {
-  background-color: #296ba8;
+  background-color: #5EB1BF;
   color: white;
 }
 
 .footer button {
-  background-color: #296ba8;
+  background-color: #5EB1BF;
 }
 
 .navfoot-color {
@@ -184,7 +184,7 @@ body {
 }
 
 .page-link {
-  background-color: #296ba8;
+  background-color: #5EB1BF;
   color: white;
 }
 
@@ -217,7 +217,7 @@ body {
 }
 .btn-search-navbar:hover {
   color: #cfcfd3;
-  background-color: #296ba8;
+  background-color: #5EB1BF;
 }
 
 
